@@ -1,0 +1,19 @@
+.Navigation{
+    display: flex;
+    justify-content: center;
+}
+.navbut{
+    margin: 0 1% 0 1%;
+    justify-content:stretch;
+    border: 1px solid red;
+    border-radius: 5px;
+    width: 20em;
+    height: 50px;
+    box-shadow: -1px -1px 10px 10px rgba(165, 0, 0, 0.2);
+}
+.navbut1{
+    width: 100%;
+}
+.LinkMar{
+    margin: 0 1% 0 1%;
+}

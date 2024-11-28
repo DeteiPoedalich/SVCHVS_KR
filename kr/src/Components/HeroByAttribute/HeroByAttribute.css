@@ -1,0 +1,25 @@
+.HeroByAttribute{
+    display: flex;
+    flex-direction: column;
+    margin-right: 2%;
+    width: 45%;
+}
+.Attribute{
+    display: flex;
+    align-items: center;
+}
+.Attribute p{
+    color: white;
+    font-size: 30px;
+    font-weight: 500;
+    margin-left: 0.5em;
+}
+.Attribute img{
+    width: auto;
+    height: 45%;
+}
+.Heroes{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}

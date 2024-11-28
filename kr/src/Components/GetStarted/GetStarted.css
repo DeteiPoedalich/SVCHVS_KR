@@ -1,0 +1,23 @@
+.GetStarted{
+    width:30% ;
+    margin: 10em 0 0 10em;
+}
+.GetStartedBut{
+    border: 1px solid red;
+    box-shadow: -1px -1px 10px 10px rgba(165, 0, 0, 0.2);
+    width: 10em;
+    border-radius: 7px;
+}
+.GetStartedBut1{
+    width: 100%;
+}
+.GetStartedName{
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+}
+.GetStartedText{
+    font-size: 20px;
+    font-weight:400;
+    color: white;
+}
