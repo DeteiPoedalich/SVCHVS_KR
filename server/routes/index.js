@@ -1,2 +1,23 @@
 const Router = require('express')
 const router = new Router()
+const heroesRouter= require('./heroesRouter')
+const buildRouter= require('./buildRouter')
+const facetRouter= require('./facetRouter')
+const itemRouter= require('./itemRouter')
+const matchRouter= require('./matchRouter')
+const playerInMatchRouter= require('./playerInMatchRouter')
+const skillRouter= require('./skillRouter')
+const teamRouter= require('./teamRouter')
+const userRouter= require('./userRouter')
+
+router.use('/build',buildRouter)
+router.use('/facet',facetRouter)
+router.use('/heroes',heroesRouter)
+router.use('/item',itemRouter)
+router.use('/match',matchRouter)
+router.use('/playerinmatch',playerInMatchRouter)
+router.use('/skill',skillRouter)
+router.use('/team',teamRouter)
+router.use('/user',userRouter)
+
+module.exports=router
