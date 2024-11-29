@@ -38,8 +38,6 @@ const Build = sequelize.define('Build',{
     SkillId2:{type : DataTypes.STRING },
     SkillId3:{type : DataTypes.STRING },
     SkillId4:{type : DataTypes.STRING },
-    SkillId5:{type : DataTypes.STRING },
-    SkillId6:{type : DataTypes.STRING },
 })
 
 const Facet = sequelize.define('Facet',{

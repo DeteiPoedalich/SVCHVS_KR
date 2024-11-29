@@ -1,8 +1,9 @@
 const Router = require('express')
 const router = new Router()
+const HeroesController= require("../Controllers/heroesController")
 
-router.post('/',)
-router.get('/',)
-router.get('/:id',)
+router.post('/',HeroesController.create)
+router.get('/',HeroesController.getAll)
+router.get('/:HeroId',HeroesController.getOne)
 
 module.exports=router
