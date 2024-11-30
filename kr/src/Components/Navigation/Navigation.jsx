@@ -9,7 +9,7 @@ export default function  Navigation(){
             <Link className='LinkMar' to="/heroes"><Button text="Heroes" color ="#393939" className1="navbut" className2="navbut1"/></Link>
             
             <Button text="Teams" color ="#393939" className1="navbut" className2="navbut1"/>
-            <Button text="Items" color ="#393939" className1="navbut" className2="navbut1"/>
+            <Link className='LinkMar' to="/items"><Button text="Items" color ="#393939" className1="navbut" className2="navbut1"/></Link>
         </div>
     )
 }

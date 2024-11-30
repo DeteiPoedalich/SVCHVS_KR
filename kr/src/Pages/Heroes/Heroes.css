@@ -1,4 +1,4 @@
-main{
+.AllHeroes{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

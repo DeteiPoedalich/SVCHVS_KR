@@ -1,0 +1,8 @@
+.AllItems{
+    display: flex;
+    flex-direction: column;
+}
+.Panels{
+    display: flex;
+    flex-direction: row;
+}

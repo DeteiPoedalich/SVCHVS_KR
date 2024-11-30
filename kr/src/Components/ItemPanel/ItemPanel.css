@@ -1,0 +1,30 @@
+.ItemPanel{
+    display: flex;
+    flex-direction: column;
+    margin: 1%;
+    width: 40%;
+    height: auto;
+    background-color: gray;
+    align-items: center;
+}
+.ItemGroups{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: gray;
+}
+.Attribute p{
+    color: white;
+    font-size: 30px;
+    font-weight: 500;
+    margin-left: 0.5em;
+}
+.Attribute img{
+    width: auto;
+    height: 45%;
+}
+.Heroes{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
