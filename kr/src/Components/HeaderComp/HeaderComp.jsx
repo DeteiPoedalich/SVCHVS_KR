@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export default function  HeaderComp(){    
     return(
         <header>
-            <Link className='headerName' to ="/"><img  src="D2H.png" alt="" /></Link>               
+            <Link className='headerName' to ="/"><img  src="http://localhost:5000/D2H.png" alt="" /></Link>               
                 <div className='Header_div'>
                     <Search/>
                     <Account/>              

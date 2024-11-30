@@ -10,3 +10,17 @@ export const fetchHeroes = async () => {
         return []; //  Лучше возвращать пустой массив в случае ошибки
     }
 };
+export const fetchHeroById = async (HeroId) => {
+    try {
+        console.log(`Fetching hero with ID: ${HeroId}`);  // Логирование ID
+        const response = await $host.get(`http://localhost:5000/api/heroes/${HeroId}`);
+        console.log('Response from server:', response);  // Логируем ответ
+        const hero = response.data;  // Предполагаем, что сервер возвращает один объект героя
+        return hero;  // Возвращаем объект
+    } catch (error) {
+        console.error("Error fetching hero:", error);
+        return null;  // Возвращаем null в случае ошибки
+    }
+};
+
+

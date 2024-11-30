@@ -7,10 +7,10 @@ export default function Heroes(){
         <>
             <HeaderComp />
             <div className='AllHeroes'>
-                <HeroByAttribute text="STRENGTH" img="img/hero_strength.png"/>
-                <HeroByAttribute text="AGILITY" img="img/hero_agility.png"/>
-                <HeroByAttribute text="INTELLIGENCE" img="img/hero_intelligence.png"/>
-                <HeroByAttribute text="UNIVERSAL" img="img/hero_universal.png"/>
+                <HeroByAttribute text="STRENGTH" img="http://localhost:5000/hero_strength.png"/>
+                <HeroByAttribute text="AGILITY" img="http://localhost:5000/hero_agility.png"/>
+                <HeroByAttribute text="INTELLIGENCE" img="http://localhost:5000/hero_intelligence.png"/>
+                <HeroByAttribute text="UNIVERSAL" img="http://localhost:5000/hero_universal.png"/>
             </div>
         </>
     )

@@ -1,5 +1,6 @@
 const {Facet} = require("../models/models")
 const ApiError=require("../error/ApiError")
+const {Heroes}=require("../models/models")
 
 class FacetController{
     async create(req,res){
@@ -13,16 +14,21 @@ class FacetController{
         }
         
     }
+    async getAll(req,res){
+        let facets
+        facets=await Facet.findAll()
+        return res.json(facets)
+    }
 
-
-    async getOne(req,res){
-        const {FacetId}=req.params
-        const facet= await Facet.findOne(
-            {
-                where:{FacetId},
-            },
-        )
-        return res.json(facet)
+    async getAllByHeroId(req, res) {
+        const { HeroId } = req.params; 
+            const facets = await Facet.findAll({
+                where: { HeroId },
+            });
+    
+            // Возвращаем найденные записи
+            return res.json(facets);
+        
     }
 }
 

@@ -45,6 +45,7 @@ const Facet = sequelize.define('Facet',{
     HeroId:{type : DataTypes.INTEGER, allowNull: false},
     FacetName: {type : DataTypes.STRING, allowNull: false},
     FacetDescription:{type:DataTypes.STRING, allowNull: false},
+    Color:{type:DataTypes.STRING, allowNull: false}
 })
 
 const Skill = sequelize.define('Skill',{
