@@ -4,14 +4,14 @@
     margin: 1%;
     width: 40%;
     height: auto;
-    background-color: gray;
+    
     align-items: center;
 }
 .ItemGroups{
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    background-color: gray;
+    
 }
 .Attribute p{
     color: white;

@@ -26,7 +26,7 @@ const HeroByAttribute = observer((props) => {
     useEffect(() => {
         // Фильтрация героев при изменении props.text (атрибута)
         if (props.text && heroes.length > 0) {
-            const filtered = heroes.filter(hero => hero.Attribute.toUpperCase() == props.text);
+            const filtered = heroes.filter(hero => hero.Attribute.toUpperCase() === props.text);
             setFilteredHeroes(filtered);
         } else {
             // Если props.text пустой или null, отображаем всех героев

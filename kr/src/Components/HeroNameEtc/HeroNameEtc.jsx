@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Facets from "../Facets/Facets"
 import "./HeroNameEtc.css"
 
+
 const HeroNameEtc = ({heroId}) => {
     const [hero, setHero] = useState(null);  // Состояние для данных героя
     const [loading, setLoading] = useState(true);  // Состояние загрузки
@@ -30,37 +31,37 @@ const HeroNameEtc = ({heroId}) => {
     if (error) return <div>{error}</div>;  // Отображаем ошибку, если она произошла
     if (!hero) return <div>Hero not found</div>;  // Если данных нет, отображаем ошибку
     let fileName;
-    if(hero.Attribute=="Strength"){
+    if(hero.Attribute==="Strength"){
         fileName="http://localhost:5000/hero_strength.png"
     }
-    else if(hero.Attribute=="Agility"){
+    else if(hero.Attribute==="Agility"){
         fileName="http://localhost:5000/hero_agility.png"
     }
-    else if(hero.Attribute=="Intelligence"){
+    else if(hero.Attribute==="Intelligence"){
         fileName="http://localhost:5000/hero_intelligence.png"
     }
-    else if(hero.Attribute=="Universal"){
+    else if(hero.Attribute==="Universal"){
         fileName="http://localhost:5000/hero_universal.png"
     }
     let HeroDifficulty1,HeroDifficulty2,HeroDifficulty3
-    if(hero.Difficulty==1){
+    if(hero.Difficulty===1){
         HeroDifficulty1="http://localhost:5000/Rectangle_1.png"
         HeroDifficulty2="http://localhost:5000/Frame_117.png"
         HeroDifficulty3="http://localhost:5000/Frame_117.png"
     }
-    else if(hero.Difficulty==2){
+    else if(hero.Difficulty===2){
         HeroDifficulty1="http://localhost:5000/Rectangle_1.png"
         HeroDifficulty2="http://localhost:5000/Rectangle_1.png"
         HeroDifficulty3="http://localhost:5000/Frame_117.png"
     }
-    else if(hero.Difficulty==3){
+    else if(hero.Difficulty===3){
         HeroDifficulty1="http://localhost:5000/Rectangle_1.png"
         HeroDifficulty2="http://localhost:5000/Rectangle_1.png"
         HeroDifficulty3="http://localhost:5000/Rectangle_1.png"
     }
 
     let AttackTypeImg
-    if(hero.AttackType=="Melee")
+    if(hero.AttackType==="Melee")
     {
         AttackTypeImg="http://localhost:5000/melee.svg"
     }

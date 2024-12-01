@@ -1,0 +1,41 @@
+.skill-build {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Расстояние между скиллами */
+    width: 50%;
+    margin-top: 0;
+    justify-content: center;
+}
+.SkillLVLS{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    background-color: rgb(75, 75, 75);
+    height: 50px;
+    color: white;
+    font-size: 20px;
+}
+.skill-group{
+    display: flex;
+    gap:5px;
+}
+.skill-build-with-skills{
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    margin: 3em 0 0 6.2em;
+}
+.ItemsBuild{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 11em;
+}
+.ItemsBuild img{
+    width: 150%;
+    height: 150%;
+}
+.ItemsBuild p{
+    margin: 0;
+    font-size: 32px;
+}

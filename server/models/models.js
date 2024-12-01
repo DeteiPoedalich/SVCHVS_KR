@@ -34,10 +34,14 @@ const Build = sequelize.define('Build',{
     ItemId4:{type : DataTypes.INTEGER},
     ItemId5:{type : DataTypes.INTEGER },
     ItemId6:{type : DataTypes.INTEGER },
-    SkillId1:{type : DataTypes.STRING },
-    SkillId2:{type : DataTypes.STRING },
-    SkillId3:{type : DataTypes.STRING },
-    SkillId4:{type : DataTypes.STRING },
+    SkillId1:{type : DataTypes.INTEGER },
+    SkillId2:{type : DataTypes.INTEGER },
+    SkillId3:{type : DataTypes.INTEGER },
+    SkillId4:{type : DataTypes.INTEGER },
+    SkillLVL1:{type : DataTypes.STRING },
+    SkillLVL2:{type : DataTypes.STRING },
+    SkillLVL3:{type : DataTypes.STRING },
+    SkillLVL4:{type : DataTypes.STRING },
 })
 
 const Facet = sequelize.define('Facet',{
@@ -115,6 +119,9 @@ User.belongsTo(Team);
 
 Build.hasMany(Item);
 Item.belongsTo(Build);
+
+Build.hasMany(Skill);
+Skill.belongsTo(Build);
 
 PlayerInMatch.hasMany(Item);
 Item.belongsTo(PlayerInMatch);
