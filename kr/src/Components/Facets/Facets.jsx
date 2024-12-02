@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "./Facets.css"
+import Facet from "../Facet/Facet.jsx"
 
 export default function Facets({ heroId }) {
     const [facets, setFacets] = useState([]);
@@ -39,10 +40,7 @@ export default function Facets({ heroId }) {
         <div className="Facets">
             {facets.length > 0 ? (
                 facets.map(facet => (
-                    <div key={facet.FacetId} className="facet" style={{ backgroundColor: facet.Color }}>
-                        <h3>{facet.FacetName}</h3>                         
-                        {/* <p>{facet.FacetDescription}</p> */}
-                    </div>
+                    <Facet color={facet.Color } text={facet.FacetName} description={facet.FacetDescription}/>
                 ))
             ) : (
                 <p>No facets available for this hero.</p>

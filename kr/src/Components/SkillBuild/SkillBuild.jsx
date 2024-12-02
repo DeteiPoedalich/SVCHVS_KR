@@ -68,7 +68,7 @@ const SkillBuild = ({ buildId }) => {
                 
             </div>
             <div className='ItemsBuild'>
-                <p>Usual Build</p>
+                <p className='ItemBuildP'>Usual Build</p>
                 <ItemBuild buildId={parseInt(buildId)}/>
             </div>
         </div>
