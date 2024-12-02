@@ -2,11 +2,14 @@
     display: flex;
     gap:2%;
     margin-left: 2%;
+    width: 80%;
+    
 }
 .facet{
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     width: 13em;
     height: 5em;
     border-radius: 15px;

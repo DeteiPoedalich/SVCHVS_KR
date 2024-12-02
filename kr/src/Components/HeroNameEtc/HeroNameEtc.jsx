@@ -66,7 +66,7 @@ const HeroNameEtc = ({heroId}) => {
         AttackTypeImg="http://localhost:5000/melee.svg"
     }
     else{
-        AttackTypeImg="http://localhost:5000/melee.svg"
+        AttackTypeImg="http://localhost:5000/ranged.svg"
     }
 
     return (

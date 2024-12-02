@@ -5,8 +5,8 @@ const {Heroes}=require("../models/models")
 class FacetController{
     async create(req,res){
         try{
-            const {HeroId,FacetName,FacetDescription}=req.body
-            const facet=await Facet.create({HeroId,FacetName,FacetDescription})
+            const {HeroId,FacetName,FacetDescription,Color}=req.body
+            const facet=await Facet.create({HeroId,FacetName,FacetDescription,Color})
             return res.json(facet)
         }
         catch(e){
