@@ -8,10 +8,14 @@ const router=require('./routes/index')
 const errorHandlinMiddleware=require("./middleware/ErrorHandlingMiddleware")
 const PORT=process.env.PORT
 const path=require('path')
+const cookieParser = require('cookie-parser')
+
 
 const app=express()
 app.use(cors())
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
+app.use(cookieParser())
 app.use(express.static(path.resolve(__dirname,'static')))
 app.use(fileUpload({}))
 app.use('/api', router)

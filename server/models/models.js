@@ -114,6 +114,11 @@ const Heroes = sequelize.define('Heroes',{
     SkillId4:{type : DataTypes.INTEGER, allowNull: false},
 })
 
+const Tokens = sequelize.define('Tokens',{
+    userId:{type : DataTypes.INTEGER, allowNull: false},
+    refreshToken:{type: DataTypes.STRING,allowNull: false}
+})
+
 Team.hasMany(User);
 User.belongsTo(Team);
 
@@ -147,5 +152,6 @@ module.exports={
     Skill,
     Match,
     PlayerInMatch,
-    Heroes
+    Heroes,
+    Tokens
 }

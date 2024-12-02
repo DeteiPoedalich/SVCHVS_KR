@@ -1,40 +1,64 @@
-const ApiError=require("../error/ApiError")
-const bcrypt = require("bcrypt")
-const jwt = require("jsonwebtoken")
-const {User}=require("../models/models")
+const ApiError = require("../error/ApiError");
+const bcrypt = require("bcrypt");
+const { User } = require("../models/models");
+const  UserService = require('../services/user-service');
+const jwt = require('jsonwebtoken'); // Import jwt
+const {validationResult}=require('express-validator');
+const userService = require("../services/user-service");
 
-const generateJwt = (UserId,NickName,role) =>{
-    return jwt.sign({UserId,NickName,role},process.env.SECRET_KEY,{expiresIn:'30m'})
-}
 
 class UserController{
-    async registration(req,res,next){
-        const {NickName,password,role}=req.body
-        if(!NickName || !password){
-            return next(ApiError.badRequest('Wrong nickname or password'))
+
+    async registration(req, res, next) {
+        try {
+            const errors=validationResult(req)
+            if(!errors.isEmpty){
+                return next(ApiError.badRequest('validation error',errors.array()))
+            }
+            const { NickName, password } = req.body;
+            const userData = await UserService.registration(NickName, password);
+            res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
+            return res.json(userData);
+        } catch (e) {
+            console.error("Registration Error:", e); // Log the error for debugging
+            next(e); // Pass the error to the error handling middleware
+            // OR, if you don't have error handling middleware:
+            // return res.status(500).json({ message: 'Registration failed. Please try again later.' });
         }
-        const candidate= await User.findOne({where:{NickName}})
-        if(candidate){
-            return next(ApiError.badRequest('There is already a user with such nickname'))
-        }
-        const hashPassword= await bcrypt.hash(password,5)
-        const user=await User.create({NickName,role,password:hashPassword})
-        const token=generateJwt(user.UserId, user.NickName, user.role)
-        return res.json({token})
     }
 
     async login(req,res,next){
-        const {NickName,password}=req.body
-        const user= await User.findOne({where:{NickName}})
-        if(!user){
-            return next(ApiError.internal("There is no user with such nickname"))
+        const {NickName,password}=req.body;
+        const userData=await UserService.login(NickName, password)
+        res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
+            return res.json(userData);
+    }
+    async logout(req, res, next) {
+        try {
+            const { refreshToken } = req.cookies;
+            await userService.logout(refreshToken); // No need to return the token data
+            res.clearCookie('refreshToken');
+            return res.json({ message: 'Successfully logged out' }); // Send a success message
+        } catch (e) {
+            next(e);
         }
-        let comparePassword=bcrypt.compareSync(password, user.password)
-        if(!comparePassword){
-            return next(ApiError.internal("Your password is wrong"))
+    }
+    async refresh(req,res,next){
+        try{
+            const {refreshToken}=req.cookies
+            const userData = await UserService.refresh(refreshToken);
+            res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
+            return res.json(userData);
+        }catch(e){
+            next(e)
         }
-        const token=generateJwt(user.UserId, user.NickName, user.role)
-        return res.json({token})
+    }
+    async getUsers(req,res,next){
+        try{
+
+        }catch(e){
+            
+        }
     }
 
     async check(req,res,next){
