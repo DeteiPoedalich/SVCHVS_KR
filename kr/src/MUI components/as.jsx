@@ -12,7 +12,8 @@ import axios from 'axios'; // Import axios for API calls
 function ResponsiveAppBar() {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-    const [avatarUrl, setAvatarUrl] = React.useState(''); // State for avatar URL
+    const [avatarUrl, setAvatarUrl] = React.useState('');
+    const [currentUser, setCurrentUser]=React.useState('') // State for avatar URL
     const navigate = useNavigate();
 
     const handleOpenUserMenu = (event) => {
@@ -23,9 +24,13 @@ function ResponsiveAppBar() {
         setAnchorElUser(null);
     };
 
-    const handleMenuClick = (route) => {
+    const handleMenuClick = (route, state = {}) => {
+        if (!currentUser) {
+            console.warn('User data not yet loaded');
+            return;
+        }
         handleCloseUserMenu();
-        navigate(route);
+        navigate(route, { state });
     };
 
     const handleLogout = () => {
@@ -33,39 +38,45 @@ function ResponsiveAppBar() {
         setIsLoggedIn(false);
         setAvatarUrl('');
         handleCloseUserMenu();
+        navigate('/')
     };
 
     React.useEffect(() => {
         const fetchUserData = async () => {
-            const token = localStorage.getItem('token'); // Check token for user authentication
+            const token = localStorage.getItem('token');
             if (token) {
                 try {
                     const response = await axios.get('http://localhost:5000/api/user/profile', {
-                        headers: { Authorization: `Bearer ${token}` }, // Send token in headers
+                        headers: { Authorization: `Bearer ${token}` },
                     });
                     setIsLoggedIn(true);
-                    setAvatarUrl(`http://localhost:5000/${response.data.Avatar}`); // Assume avatar URL comes in response
+                    setAvatarUrl(`http://localhost:5000/${response.data.Avatar}`);
+                    setCurrentUser(response.data); // Ensure this contains user data
                 } catch (error) {
                     console.error('Error fetching user data:', error);
                     setIsLoggedIn(false);
                     setAvatarUrl('');
+                    setCurrentUser(null);
                 }
             } else {
                 setIsLoggedIn(false);
                 setAvatarUrl('');
+                setCurrentUser(null);
             }
         };
-
         fetchUserData();
-    }, []); // Run on component mount
+    }, []);
 
     // Dynamic settings based on login state
     const settings = isLoggedIn
-        ? [
-              { name: 'Profile', action: () => handleMenuClick('/profile') },
-              { name: 'Log Out', action: handleLogout },
-          ]
-        : [{ name: 'Log In', action: () => handleMenuClick('/login') }];
+    ? [
+          {
+              name: 'Profile',
+              action: () => handleMenuClick('/profile', { avatarUrl, isLoggedIn, currentUser }),
+          },
+          { name: 'Log Out', action: handleLogout },
+      ]
+    : [{ name: 'Log In', action: () => handleMenuClick('/login') }];
 
     return (
         <div>

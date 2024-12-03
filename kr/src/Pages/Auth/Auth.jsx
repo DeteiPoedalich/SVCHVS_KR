@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './Auth.css';
 import { useNavigate } from 'react-router-dom';
-import { registration, login } from '../http/userAPI';
-import { userStore } from '../store/UserStore';
+import { registration, login } from '../../http/userAPI';
+import { userStore } from '../../store/UserStore';
 
 function Auth() {
     const [isLoginForm, setIsLoginForm] = useState(true);
@@ -17,6 +17,7 @@ function Auth() {
         setNickName('');
         setPassword('');
     };
+    
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -43,7 +44,7 @@ function Auth() {
             <h2>Authentication</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="nickName">Nickname:</label>
+                    <label className='Label' htmlFor="nickName">Nickname:</label>
                     <input
                         type="text"
                         id="nickName"
@@ -54,7 +55,7 @@ function Auth() {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password">Password:</label>
+                    <label  className='Label' htmlFor="password">Password:</label>
                     <input
                         type="password"
                         id="password"
