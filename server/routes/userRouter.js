@@ -9,7 +9,7 @@ router.post('/registration',
 router.post('/login',UserController.login)
 router.post('/logout',UserController.logout)
 router.get('/refresh',UserController.refresh)
-router.get('/getUsers',UserController.getUsers)
-router.get('/auth',authMiddleWare,UserController.check)
+router.get('/users',UserController.getUsers)
+router.get('/auth',UserController.check)
 
 module.exports=router

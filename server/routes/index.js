@@ -9,6 +9,7 @@ const playerInMatchRouter= require('./playerInMatchRouter')
 const skillRouter= require('./skillRouter')
 const teamRouter= require('./teamRouter')
 const userRouter= require('./userRouter')
+const authMiddleWare=require('../middleware/authMiddleWare')
 
 router.use('/build',buildRouter)
 router.use('/facet',facetRouter)

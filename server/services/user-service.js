@@ -50,20 +50,37 @@ class UserService {
             throw ApiError.internal('Logout failed'); // Throw a custom error
         }
     }
-    async refresh(refreshToken){
-        if(!refreshToken){
-            throw ApiError.unauthorized();
+    async refresh(refreshToken) {
+        if (!refreshToken) {
+          throw ApiError.unauthorized('Refresh token is missing');
         }
-        const userData=tokenService.validateRefreshToken(refreshToken)
-        const tokenFromDb=await tokenService.findToken(refreshToken)
-        if(!userData||!tokenFromDb){
-            throw ApiError.unauthorized()
+    
+        const userData = tokenService.validateRefreshToken(refreshToken);
+        const tokenFromDb = await tokenService.findToken(refreshToken);
+    
+        if (!userData || !tokenFromDb) {
+          throw ApiError.unauthorized('Invalid refresh token');
         }
-        const user=await User.findById(userData.UserId)
-        const userDTO=new UserDTO(user)
-            const tokens= tokenService.generateTokens({...userDTO})
-            await TokenService.saveToken(userDTO.UserId, tokens.refreshToken);
-            return { ...tokens, user: userDTO };
+    
+        // Ensure User IDs match between token and database
+        if (userData.UserId !== tokenFromDb.userId) { // Assuming userId is the field in your Tokens model
+            throw ApiError.unauthorized('Invalid refresh token (user mismatch)');
+        }
+    
+    
+        const user = await User.findByPk(userData.UserId);
+        if (!user) {
+          throw ApiError.notFound('User not found');
+        }
+    
+        const userDTO = new UserDTO(user);
+        const tokens = tokenService.generateTokens({ ...userDTO });
+        await tokenService.saveToken(userDTO.UserId, tokens.refreshToken);
+        return { ...tokens, user: userDTO };
+      }
+    async getAllUsers(){
+        const users=await User.findAll()
+        return users;
     }
 }
 

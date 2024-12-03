@@ -24,20 +24,20 @@ class TokenService {
         }
     }
 
-    async saveToken(UserId, refreshToken) {  // Use UserId consistently
+    async saveToken(UserId, refreshToken) {
         try {
-            const tokenData = await Tokens.findOne({ where: { userId: UserId } });
-            if (tokenData) {
-                tokenData.refreshToken = refreshToken;
-                return await tokenData.save(); // Add await
-            }
-            const token = await Tokens.create({ userId: UserId, refreshToken });
-            return token;
+          const tokenData = await Tokens.findOne({ where: { userId: UserId } });
+          if (tokenData) {
+            tokenData.refreshToken = refreshToken;
+            return tokenData.save(); // No need for await here, save() returns a Promise
+          }
+          const token = await Tokens.create({ userId: UserId, refreshToken });
+          return token;
         } catch (e) {
-            console.error("Error saving token:", e); // Detailed error logging
-            throw e; // Re-throw the error to be caught by UserService
+          console.error('Error saving token:', e);
+          throw e; // Re-throw
         }
-    }
+      }
     async removeToken(refreshToken) {
         try {
             const deletedCount = await Tokens.destroy({ where: { refreshToken } }); // Use destroy with where clause
@@ -51,8 +51,8 @@ class TokenService {
         }
     }
     async findToken(refreshToken) {
-        const tokenData=await tokenModel.findOne({refreshToken})
-        return tokenData 
+        const tokenData = await Tokens.findOne({ where: { refreshToken } }); // Use Tokens model
+        return tokenData;
     }
 }
 
