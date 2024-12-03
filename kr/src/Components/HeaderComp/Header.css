@@ -15,6 +15,3 @@ header{
 .headerName{
     margin-left:10% ;
 }
-header svg{
-    filter: invert(1.0);
-}

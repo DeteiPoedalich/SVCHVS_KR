@@ -71,6 +71,24 @@ class UserController{
         const token=generateJwt(req.user.UserId, req.user.NickName, req.user.role)
         return res.json(token)
     }
+    async getProfile(req, res, next) {
+        try {
+            const userId = req.user.UserId; // Assumes authMiddleware adds `req.user`
+            const user = await User.findOne({
+                where: { UserId: userId },
+                attributes: ['UserId', 'NickName', 'Avatar'], // Select fields to return
+            });
+
+            if (!user) {
+                return next(ApiError.notFound('User not found'));
+            }
+
+            return res.json(user);
+        } catch (e) {
+            console.error("Get Profile Error:", e);
+            return next(e);
+        }
+    }
 }
 
 module.exports=new UserController()

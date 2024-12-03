@@ -4,6 +4,7 @@ import HomePage from './Pages/Homepage/HomePage.jsx'
 import Heroes from './Pages/Heroes/Heroes.jsx';
 import Items from './Pages/Items/Items.jsx';
 import Hero from './Pages/Hero/Hero.jsx'
+import Auth from './Pages/Auth.jsx';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/items" element={<Items/>} />
           <Route path="/teams" element={<HomePage/>} />
           <Route path="/hero/:HeroId" element={<Hero/>} />
+          <Route path="/login" element={<Auth/>}/>
         </Routes>
      </BrowserRouter>
     </>

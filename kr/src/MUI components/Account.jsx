@@ -53,8 +53,8 @@ export default function MenuAppBar() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>Log out</MenuItem>
+                <MenuItem onClick={handleClose}>Log In</MenuItem>
+                <MenuItem onClick={handleClose}>Register</MenuItem>
               </Menu>
             </div>
           )}
