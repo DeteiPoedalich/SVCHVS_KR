@@ -1,9 +1,9 @@
 const { User } = require('../models/models');
 const bcrypt = require('bcrypt');
-const TokenService = require('./token-service');
+const tokenService = require('./token-service');
 const UserDTO = require('../dtos/user-dto');
 const ApiError = require('../error/ApiError');
-const tokenService = require('./token-service');
+
 
 class UserService {
     async registration(NickName, password) {
@@ -17,8 +17,8 @@ class UserService {
             const role = "USER"; // Add role back
             const user = await User.create({ NickName, role, password: hashPassword }); // Include role
             const userDTO = new UserDTO(user);
-            const tokens = TokenService.generateTokens({ ...userDTO }); // Correct arguments
-            await TokenService.saveToken(userDTO.UserId, tokens.refreshToken); // Consistent UserId
+            const tokens = tokenService.generateTokens({ ...userDTO }); // Correct arguments
+            await tokenService.saveToken(userDTO.UserId, tokens.refreshToken); // Consistent UserId
             return { ...tokens, user: userDTO };
         } catch (e) {
             console.error("Registration Error:", e); // Log the error
@@ -35,7 +35,7 @@ class UserService {
             }
             const userDTO=new UserDTO(user)
             const tokens= tokenService.generateTokens({...userDTO})
-            await TokenService.saveToken(userDTO.UserId, tokens.refreshToken);
+            await tokenService.saveToken(userDTO.UserId, tokens.refreshToken);
             return { ...tokens, user: userDTO };
         }catch(e){
             return ApiError.badRequest('Nickname or password is incorrect');
@@ -63,7 +63,7 @@ class UserService {
         }
     
         // Ensure User IDs match between token and database
-        if (userData.UserId !== tokenFromDb.userId) { // Assuming userId is the field in your Tokens model
+        if (userData.UserId !== tokenFromDb.UserId) { // Assuming userId is the field in your Tokens model
             throw ApiError.unauthorized('Invalid refresh token (user mismatch)');
         }
     

@@ -1,3 +1,4 @@
+const { FOREIGNKEYS } = require('sequelize/lib/query-types')
 const sequelize=require('../db')
 const {DataTypes}= require('sequelize')
 
@@ -115,7 +116,7 @@ const Heroes = sequelize.define('Heroes',{
 })
 
 const Tokens = sequelize.define('Tokens',{
-    userId:{type : DataTypes.INTEGER, allowNull: false},
+    UserId:{type : DataTypes.INTEGER, allowNull:false},
     refreshToken:{type: DataTypes.STRING,allowNull: false}
 })
 
@@ -142,6 +143,9 @@ Skill.belongsTo(Heroes);
 
 Heroes.hasOne(Build);
 Build.belongsTo(Heroes);
+
+
+sequelize.sync()
 
 module.exports={
     User,

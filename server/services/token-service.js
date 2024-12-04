@@ -26,13 +26,15 @@ class TokenService {
 
     async saveToken(UserId, refreshToken) {
         try {
-          const tokenData = await Tokens.findOne({ where: { userId: UserId } });
+          const tokenData = await Tokens.findOne({ where: { UserId: UserId } });
           if (tokenData) {
             tokenData.refreshToken = refreshToken;
             return tokenData.save(); // No need for await here, save() returns a Promise
           }
-          const token = await Tokens.create({ userId: UserId, refreshToken });
-          return token;
+          else{
+            const token = await Tokens.create({ UserId: UserId, refreshToken:refreshToken });
+          }
+          
         } catch (e) {
           console.error('Error saving token:', e);
           throw e; // Re-throw

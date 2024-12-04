@@ -76,7 +76,6 @@ class UserController{
             const userId = req.user.UserId; // Assumes authMiddleware adds `req.user`
             const user = await User.findOne({
                 where: { UserId: userId },
-                attributes: ['UserId', 'NickName', 'Avatar'], // Select fields to return
             });
 
             if (!user) {
