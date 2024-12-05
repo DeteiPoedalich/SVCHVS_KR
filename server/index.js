@@ -20,7 +20,7 @@ app.use(express.static(path.resolve(__dirname,'static')))
 app.use(fileUpload({}))
 app.use('/api', router)
 
-app.use(errorHandlinMiddleware)
+// app.use(errorHandlinMiddleware)
 
 const start=async()=>{
     try{

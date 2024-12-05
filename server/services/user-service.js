@@ -82,6 +82,28 @@ class UserService {
         const users=await User.findAll()
         return users;
     }
+    async updateUser(userId, NickName, avatar,res) {
+
+        try {
+            const updateData = {};
+            if (NickName) updateData.NickName = NickName;
+            if (avatar) updateData.Avatar = avatar;
+    
+            const updated = await User.findByPk(userId)
+
+            if (!updated) {
+                throw new Error('User not found or no changes made'); // More specific error
+            }
+            //const user=await updated.update(updateData)
+            return await updated.update(updateData)
+        } catch (error) {
+            console.error("Update User Error:", error);
+            throw error; // Re-throw the error to be handled by the controller
+        }
+    }
+    // User.update(updateData, { where: { UserId: userId } });
+    
+    // await User.findOne({ where: { UserId: userId } });
 }
 
 module.exports = new UserService();

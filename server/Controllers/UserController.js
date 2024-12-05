@@ -5,7 +5,22 @@ const  UserService = require('../services/user-service');
 const jwt = require('jsonwebtoken'); // Import jwt
 const {validationResult}=require('express-validator');
 const userService = require("../services/user-service");
+const uuid=require('uuid')
+const path=require("path")
+const fs=require("fs")
+const multer = require('multer');
+const { v4: uuidv4 } = require('uuid');
 
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, path.join(__dirname, '..', 'static', 'diplomas'));
+    },
+    filename: (req, file, cb) => {
+        cb(null, uuidv4() + path.extname(file.originalname)); // Генерация уникального имени файла
+    }
+});
+const upload = multer({ storage:storage }); 
 
 class UserController{
 
@@ -88,6 +103,30 @@ class UserController{
             return next(e);
         }
     }
+    async update(req, res, next) {
+        try {
+            const userId =req.params;
+            // return res.status(500).json(userId)
+            const { NickName } = req.body;
+            const avatar=req.file
+            console.error(avatar)
+            const fileName = uuidv4() + path.extname(avatar.originalname);
+            fs.rename(avatar.path, (path.resolve(__dirname, '..', 'static', fileName)));
+            //await avatar.mv(path.resolve(__dirname, '..', 'static', fileName));
+            // fs.copyFileSync(avatar,(path.resolve(__dirname, '..', 'static', fileName)))
+            console.log("avatarUrl")
+            const updatedUser = await UserService.updateUser(userId.id, NickName, fileName);
+            return res.json(updatedUser);
+        } catch (e) {
+
+            console.error("Update User Error:", e);
+            return next(e)
+        }
+    }
+    
+    
+    
+    
 }
 
 module.exports=new UserController()

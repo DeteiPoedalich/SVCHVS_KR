@@ -7,11 +7,11 @@ class ApiError extends Error {
     }
 
     static badRequest(message) {
-        return new ApiError(400, message); // Corrected status code
+        return new ApiError(400, "Ошибка"); // Corrected status code
     }
 
     static internal(message) {
-        return new ApiError(500, message);
+        return new ApiError(500, "Ошибка");
     }
 
     static forbidden(message) {

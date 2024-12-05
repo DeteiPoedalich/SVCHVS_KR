@@ -3,7 +3,7 @@ const sequelize=require('../db')
 const {DataTypes}= require('sequelize')
 
 const User = sequelize.define('User',{
-    UserId:{type:DataTypes.INTEGER, primaryKey:true, autoIncrement: true},
+    UserId:{type:DataTypes.BIGINT, primaryKey:true, autoIncrement: true},
     CurrentTeamId:{type : DataTypes.INTEGER},
     TeamList:{type : DataTypes.STRING},
     NickName: {type : DataTypes.STRING, allowNull: false, unique:true},
