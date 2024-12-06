@@ -22,21 +22,17 @@ export const refresh=async(NickName, password) => {
     localStorage.clear('token', data.accessToken); // Store the token
     return data;
 };
-export const update = async (UserId, NickName, avatar) => { // Accept avatar as a File object
+export const getProfile=async(userId) => {
+    const { data } = await $host.get(`http://localhost:5000/api/user/${userId}`); // Store the token
+    return data;
+};
+export const update = async (UserId, NickName ) => { // Accept avatar as a File object
     try {
-        if(!avatar){
-            avatar.name=null
-        }
-        const object={
-            NickName:NickName,
-            avatar:avatar.name
-        }   
-        console.log(UserId)
-        console.log(avatar)
-        console.log(avatar.name)
+        console.log(NickName)
+
         const { data } = await $host.put(
             `http://localhost:5000/api/user/update/${UserId}`,
-            object, // Send FormData
+            {NickName}, // Send FormData
             {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,  // Important for file uploads

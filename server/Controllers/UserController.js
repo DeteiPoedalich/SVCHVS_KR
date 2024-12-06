@@ -126,20 +126,14 @@ class UserController{
     // }
     async update(req, res, next) {
         try {
-            const userId =req.params;
+            const user =req.params;
             // return res.status(500).json(userId)
-            const  NickName= req.body.NickName;
-            const avatar  = req.body.avatar;
-            //const {avatar}=req.files
-            console.error(avatar)
-            const fileName = uuid.v4()+".jpg"
-            // avatar.mv(path.resolve(__dirname,'..','static',fileName))
-            //await avatar.mv(path.resolve(__dirname, '..', 'static', fileName));
-            fs.copyFileSync("F:/"+avatar,(path.resolve(__dirname, '..', 'static', fileName)))
-            console.log("avatarUrl")
-            const UserId=userId.id
+            const NickName= req.body
+            console.log(NickName+"cont")
+            console.error(user+"cont")
+            const UserId=user.id
             console.error(UserId)
-            const updatedUser = await UserService.updateUser({UserId, NickName, Avatar:fileName});
+            const updatedUser = await UserService.updateUser(UserId, NickName);
             return res.json(updatedUser);
         } catch (e) {
 

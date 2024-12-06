@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import HeaderComp from '../../Components/HeaderComp/HeaderComp';
 import { update } from "../../http/userAPI"; // Импорт функции API
+import GetTeamsinProf from '../../Components/GetTeamsInProf/GetTeamsInProf';
 import './Profile.css';
 
 function Profile() {
@@ -47,63 +48,43 @@ function Profile() {
     //     }
     // };
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            setAvatar({ ...avatar, avatar: file});
-        } else {
-            alert("Пожалуйста, загрузите файл формата PDF.");
+    
+    const handleSave = async () => {
+        console.log(avatar)
+        setIsLoading(true);
+        try {
+            const updatedUser = await update(currentUser.UserId,nickName, avatar);
+            console.log('Updated User:', updatedUser);
+            console.log(nickName)
+            alert('Profile updated successfully!');
+            setIsEditing(false);
+            
+        } catch (error) {
+            console.error('Error updating profile:', error);
+            alert(error.message || 'Failed to update profile. Please try again.');
+        } finally {
+            setIsLoading(false);
         }
     };
-    
-    // const handleSave = async () => {
-    //     console.log(avatar)
-    //     setIsLoading(true);
+
+    // const handleSave = async (e) => {
+    //     e.preventDefault();
+        
+
+    //     setIsLoading(true); // Set loading state
+
     //     try {
-    //         const updatedUser = await update(currentUser.UserId,nickName, avatar);
-    //         console.log('Updated User:', updatedUser);
-    //         alert('Profile updated successfully!');
-    //         setIsEditing(false);
+    //         console.log(nickName)
+    //         // Update Redux store after successful API call
+    //         await update(currentUser.UserId,nickName);
+
     //     } catch (error) {
-    //         console.error('Error updating profile:', error);
-    //         alert(error.message || 'Failed to update profile. Please try again.');
+    //         console.error('Error registering:', error);
+    //         alert('Registration failed. Please try again.');
     //     } finally {
-    //         setIsLoading(false);
+    //         setIsLoading(false); // Reset loading state
     //     }
     // };
-
-    const handleSave = async (e) => {
-        e.preventDefault();
-        
-        // if (!avatar.avatar) {
-        //     alert("Please upload your diploma.");
-        //     return;
-        // }
-
-        // if (!currentUser || !currentUser.userId) {
-        //     alert("You must be logged in to become a coach.");
-        //     return; // Prevent further execution
-        // }
-
-        setIsLoading(true); // Set loading state
-
-        try {
-            
-            const userData = new FormData();
-            userData.append('NickName',nickName.nickName)
-            userData.append('avatar', avatar.avatar);
-            console.log(avatar.avatar)
-            console.log(nickName)
-            // Update Redux store after successful API call
-            await update(currentUser.UserId,nickName, avatar.avatar);
-
-        } catch (error) {
-            console.error('Error registering:', error);
-            alert('Registration failed. Please try again.');
-        } finally {
-            setIsLoading(false); // Reset loading state
-        }
-    };
 
     // Conditionally render the form
     if (!currentUser) {
@@ -126,39 +107,45 @@ function Profile() {
                             value={nickName}
                             onChange={(e) => setNickName(e.target.value)}
                             variant="outlined"
-                            sx={{ fontSize: '32px', alignContent: 'center', color: 'white', ml: 2 }}
+                            sx={{ fontSize: '64px', alignContent: 'center', color: 'white',justifyContent:'center',width:'3em' }}
                         />
                     ) : (
                         <Typography variant="h6" sx={{ fontSize: '64px', alignContent: 'center', color: 'white', ml: 2 }}>
                             {nickName}
                         </Typography>
                     )}
-                </Box>
-                <Box sx={{ textAlign: 'center', display: 'flex', width: '30em', alignContent: 'center', color: 'white', mt: 2 }}>
-                    {isEditing && (
-                        <Button
-                            variant="contained"
-                            component="label"
-                            sx={{ marginRight: 2 }}
-                        >
-                            Change Avatar
-                            <input
-                                type="file"
-                                hidden
-                                accept="image/*"
-                                onChange={handleFileChange}
-                            />
-                        </Button>
-                    )}
                     <Button
                         variant="contained"
                         disabled={isLoading} // Блокируем кнопку при загрузке
                         onClick={isEditing ? handleSave : () => setIsEditing(true)}
+                        sx={{ textAlign: 'center', display: 'flex', width: '2em', alignSelf: 'flex-end', color: 'white',mb:2,backgroundColor:"rgb(70,70,70)"}}
                     >
                         {isEditing ? (isLoading ? 'Saving...' : 'Save') : 'Edit'}
                     </Button>
                 </Box>
+                {/* <Box sx={{ textAlign: 'center', display: 'flex', width: '2em', alignSelf: 'flex-end', color: 'white',mb:2}}>
+                    
+                    <Button
+                        variant="contained"
+                        disabled={isLoading} // Блокируем кнопку при загрузке
+                        onClick={isEditing ? handleSave : () => setIsEditing(true)}
+                        sx={{backgroundColor:'rgb(70,70,70)'}}
+                    >
+                        {isEditing ? (isLoading ? 'Saving...' : 'Save') : 'Edit'}
+                    </Button>
+                </Box> */}
+                <Box sx={{ textAlign: 'center', display: 'flex', width: '30em', alignContent: 'center' }}>
+                    <Typography variant="h6" sx={{ fontSize: '64px', alignContent: 'center', color: 'white', ml: 2 }}>
+                        Nivea
+                    </Typography>
+                    <Avatar
+                        alt="Team Avatar"
+                        src="http://localhost:5000/nivea.jpg"
+                        sx={{ width: 150, height: 150, margin: '0 auto' }}
+                    />
+                </Box>
             </div>
+        <GetTeamsinProf userId={currentUser.UserId}/>
         </>
     );
 }

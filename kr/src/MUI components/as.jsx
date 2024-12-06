@@ -51,7 +51,7 @@ function ResponsiveAppBar() {
                     });
                     setIsLoggedIn(true);
                     console.log(response.data.Avatar)
-                    setAvatarUrl(`http://localhost:5000/${response.data.Avatar}`);
+                    setAvatarUrl(`http://localhost:5000/sema.jpg`);
                     setCurrentUser(response.data); // Ensure this contains user data
                 } catch (error) {
                     console.error('Error fetching user data:', error);
