@@ -82,23 +82,28 @@ class UserService {
         const users=await User.findAll()
         return users;
     }
-    async updateUser(userId, NickName, avatar,res) {
+    async updateUser(userId, NickName, avatar) { // Removed 'res' as it's not used
 
         try {
             const updateData = {};
             if (NickName) updateData.NickName = NickName;
             if (avatar) updateData.Avatar = avatar;
     
-            const updated = await User.findByPk(userId)
-
-            if (!updated) {
-                throw new Error('User not found or no changes made'); // More specific error
+            console.log("userId:", userId); // Log the userId to verify its value
+    
+            const updatedUser = await User.findByPk(userId.UserId); // Use userId directly
+    
+            if (!updatedUser) {
+                throw new Error('User not found'); // Clearer error message
             }
-            //const user=await updated.update(updateData)
-            return await updated.update(updateData)
+    
+            const user = await updatedUser.update(updateData); // Update the found user
+            console.log("Updated user:", user); // Log the updated user object
+    
+            return user;
         } catch (error) {
             console.error("Update User Error:", error);
-            throw error; // Re-throw the error to be handled by the controller
+            throw error;
         }
     }
     // User.update(updateData, { where: { UserId: userId } });

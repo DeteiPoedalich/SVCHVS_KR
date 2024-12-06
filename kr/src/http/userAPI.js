@@ -24,12 +24,16 @@ export const refresh=async(NickName, password) => {
 };
 export const update = async (UserId, NickName, avatar) => { // Accept avatar as a File object
     try {
+        if(!avatar){
+            avatar.name=null
+        }
         const object={
             NickName:NickName,
-            avatar:avatar
-        }
+            avatar:avatar.name
+        }   
         console.log(UserId)
         console.log(avatar)
+        console.log(avatar.name)
         const { data } = await $host.put(
             `http://localhost:5000/api/user/update/${UserId}`,
             object, // Send FormData
@@ -39,6 +43,7 @@ export const update = async (UserId, NickName, avatar) => { // Accept avatar as 
                 },
             }
         );
+        
         return data;
     } catch (error) {
         console.error("Error updating user profile:", error.response ? error.response.data : error.message);

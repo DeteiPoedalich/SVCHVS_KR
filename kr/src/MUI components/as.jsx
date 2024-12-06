@@ -50,6 +50,7 @@ function ResponsiveAppBar() {
                         headers: { Authorization: `Bearer ${token}` },
                     });
                     setIsLoggedIn(true);
+                    console.log(response.data.Avatar)
                     setAvatarUrl(`http://localhost:5000/${response.data.Avatar}`);
                     setCurrentUser(response.data); // Ensure this contains user data
                 } catch (error) {
@@ -85,7 +86,7 @@ function ResponsiveAppBar() {
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                         <Avatar
                             alt="User Avatar"
-                            src={avatarUrl || '/placeholder-avatar.png'} // Default placeholder if no avatar
+                            src={avatarUrl} // Default placeholder if no avatar
                         />
                     </IconButton>
                 </Tooltip>

@@ -75,10 +75,10 @@ function Profile() {
     const handleSave = async (e) => {
         e.preventDefault();
         
-        if (!avatar.avatar) {
-            alert("Please upload your diploma.");
-            return;
-        }
+        // if (!avatar.avatar) {
+        //     alert("Please upload your diploma.");
+        //     return;
+        // }
 
         // if (!currentUser || !currentUser.userId) {
         //     alert("You must be logged in to become a coach.");
@@ -90,11 +90,12 @@ function Profile() {
         try {
             
             const userData = new FormData();
-            userData.append('avatar', avatar.avatar.name);
+            userData.append('NickName',nickName.nickName)
+            userData.append('avatar', avatar.avatar);
             console.log(avatar.avatar)
-
+            console.log(nickName)
             // Update Redux store after successful API call
-            await update(currentUser.UserId, avatar);
+            await update(currentUser.UserId,nickName, avatar.avatar);
 
         } catch (error) {
             console.error('Error registering:', error);
