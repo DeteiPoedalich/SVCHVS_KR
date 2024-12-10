@@ -1,6 +1,6 @@
 const { FOREIGNKEYS } = require('sequelize/lib/query-types')
 const sequelize=require('../db')
-const {DataTypes}= require('sequelize')
+const {DataTypes, BIGINT}= require('sequelize')
 
 const User = sequelize.define('User',{
     UserId:{type:DataTypes.BIGINT, primaryKey:true, autoIncrement: true},
@@ -76,6 +76,7 @@ const Match = sequelize.define('Match',{
 
 const PlayerInMatch = sequelize.define('PlayerInMatch',{
     PlayerId:{type:DataTypes.INTEGER, primaryKey:true, autoIncrement: true},
+    User_Id:{type:DataTypes.BIGINT},
     PlayerName:{type : DataTypes.STRING, allowNull: false, defaultValue: "Anonyomous"},
     HeroId:{type : DataTypes.INTEGER, allowNull: false},
     Kills:{type : DataTypes.INTEGER, allowNull: false},

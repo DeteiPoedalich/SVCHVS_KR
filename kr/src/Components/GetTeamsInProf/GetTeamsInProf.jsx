@@ -1,22 +1,56 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { update } from "../../http/userAPI"; // Импорт функции API
 
-function GetTeamsinProf({userId}) {
+function GetTeamsinProf() {
     const location = useLocation();
     const { avatarUrl, isLoggedIn, currentUser } = location.state || {};
-    
-    const [teamName, setTeamName] = useState();
-    const [avatar, setAvatar] = useState(avatarUrl || '/placeholder-avatar.png');
-    const [user, SetUser] = useState();
-    const [isLoading, setIsLoading] = useState(false);
-    const [TeamsId,setTeamIds]=useState([])
-    
+    const { userId } = useParams(); // Get userId from route parameters
+    const [user, setUser] = useState(null);
+    const [teamIds, setTeamIds] = useState([]);
+    const [isLoading, setIsLoading] = useState(true); // Start in loading state
+
+
+    useEffect(() => {  // Use useEffect to fetch user data only once
+        const fetchUser = async () => {
+            try {
+                const response = await fetch(`http://localhost:5000/api/profile/${userId}`); // Correct URL construction
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                setUser(data);
+            } catch (err) {
+                console.error('Error fetching user:', err.message);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchUser();
+    }, [userId]); // Add userId as a dependency
+
+
+    useEffect(() => { // Use another useEffect for GetTeams, dependent on user data
+        const getTeams = async () => {
+            if (user && user.TeamList) { // Check if user and TeamList exist
+                try {
+                    const array = user.TeamList.split(" ").map(Number); // Convert to numbers
+                    setTeamIds(array);
+
+                } catch (err) {
+                    console.error('Error processing TeamList:', err.message);
+                    setTeamIds([]); // Set to empty array on error
+                }
+            }
+        };
+
+        getTeams();
+    }, [user]); // Add user as a dependency
+
+
 
     if (!isLoggedIn) {
         return (
@@ -26,57 +60,30 @@ function GetTeamsinProf({userId}) {
         );
     }
 
-    if (!currentUser) {
-        return <div>Loading...</div>; // Or a more informative message
+    if (isLoading) {
+        return <div>Loading...</div>;
     }
-    const fetchUser = async () => {
-        try {
-            const response = await fetch(`http://localhost:5000/api/profile/:${userId}`);
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const data = await response.json();               
-            SetUser(data);
-            console.log(data)
-        } catch (err) {
-            console.error('Error fetching user:', err.message);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-    fetchUser()
-    const GetTeams=async()=>{
-        try {
-            let array=[]
-            array=parseInt(user.TeamList.Split(" "))
-            setTeamIds(array)
-        } catch (err) {
-            console.error('Error fetching facets:', err.message);
-        } finally {
-            setIsLoading(false);
-        }
-    }
-    GetTeams()
+    let aga=[1,2,3]
+// ,borderRight:'1px solid rgb(109, 0, 0)',borderBottom:'1px solid rgb(109, 0, 0)'
     return (
-        <>
-           <Box>
-           { 
-                TeamsId.map(TeamId => (
-                    <Box sx={{ textAlign: 'center', display: 'flex', width: '30em', alignContent: 'center' }}>
-                        <Typography variant="h6" sx={{ fontSize: '64px', alignContent: 'center', color: 'white', ml: 2 }}>
-                        Nivea
-                    </Typography>
+        <Box sx={{pt:5,pl:5,width:'25em',height:'70%'}}>
+            <Typography variant="h6" sx={{ fontSize: '36px', alignContent: 'center', color: 'white', ml: 2 }}>
+                Teams played in
+            </Typography>
+            {aga.map((teamId) => (
+                <Box key={teamId} sx={{ textAlign: 'center', display: 'flex', width: '20em', alignContent: 'center', mt:2,mb:2}}>
                     <Avatar
                         alt="Team Avatar"
-                        src="http://localhost:5000/nivea.jpg"
-                        sx={{ width: 150, height: 150, margin: '0 auto' }}
-                    />  
-                    </Box>
-                ))
-            
-            }
-           </Box>
-        </>
+                        src="http://localhost:5000/nivea.jpg" // Replace with actual avatar URL
+                        sx={{ width: 100, height: 100, margin: '0 auto' }}
+                    />
+                    <Typography variant="h6" sx={{ fontSize: '36px', alignContent: 'center', color: 'white', ml: 2 }}>
+                        {/* Replace with actual team name */}
+                        Team {teamId} 
+                    </Typography>
+                </Box>
+            ))}
+        </Box>
     );
 }
 

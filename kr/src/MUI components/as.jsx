@@ -44,9 +44,10 @@ function ResponsiveAppBar() {
     React.useEffect(() => {
         const fetchUserData = async () => {
             const token = localStorage.getItem('token');
+            let userId
             if (token) {
                 try {
-                    const response = await axios.get('http://localhost:5000/api/user/profile', {
+                    const response = await axios.get(`http://localhost:5000/api/user/profile/${userId}`, {
                         headers: { Authorization: `Bearer ${token}` },
                     });
                     setIsLoggedIn(true);

@@ -6,6 +6,7 @@ import Items from './Pages/Items/Items.jsx';
 import Hero from './Pages/Hero/Hero.jsx'
 import Auth from './Pages/Auth/Auth.jsx';
 import Profile from './Pages/Profile/Profile.jsx';
+import Match from './Pages/Match/Match.jsx';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/hero/:HeroId" element={<Hero/>} />
           <Route path="/login" element={<Auth/>}/>
           <Route path="/profile" element={<Profile/>}/>
+          <Route path="/match/:matchId" element={<Match/>}/>
         </Routes>
      </BrowserRouter>
     </>

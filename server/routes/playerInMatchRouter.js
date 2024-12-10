@@ -3,6 +3,7 @@ const router = new Router()
 const PlayerInMatchController=require("../Controllers/playerInMatchController")
 
 router.post('/',PlayerInMatchController.create)
-router.get('/:PlayerId',PlayerInMatchController.getOne)
+router.get('/:userId', PlayerInMatchController.getOne);
+router.get('/inmatch/:matchId', PlayerInMatchController.getSome) 
 
 module.exports=router

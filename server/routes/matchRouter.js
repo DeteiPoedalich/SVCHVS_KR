@@ -5,6 +5,6 @@ const matchController=require("../Controllers/matchController")
 router.post('/',matchController.create)
 router.get('/',matchController.getAll)
 router.get('/',matchController.getSome)
-router.get('/:MatchId',matchController.getOne)
+router.get('/:matchId',matchController.getOne)
 
 module.exports=router

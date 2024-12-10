@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import HeaderComp from '../../Components/HeaderComp/HeaderComp';
 import { update } from "../../http/userAPI"; // Импорт функции API
 import GetTeamsinProf from '../../Components/GetTeamsInProf/GetTeamsInProf';
+import GetMatchesinProf from '../../Components/GetMatchesInProf/GetMatchesInProf';
 import './Profile.css';
 
 function Profile() {
@@ -35,19 +36,6 @@ function Profile() {
             </Box>
         );
     }
-
-    // const handleAvatarChange = (event) => {
-    //     const file = event.target.files;
-    //     if (file) {
-    //         console.log(file.name)
-            
-    //             setAvatar(file);
-    //            // обновляем аватар в состоянии
-            
-    //         //console.log(reader.readAsDataURL(file))
-    //     }
-    // };
-
     
     const handleSave = async () => {
         console.log(avatar)
@@ -67,36 +55,15 @@ function Profile() {
         }
     };
 
-    // const handleSave = async (e) => {
-    //     e.preventDefault();
-        
-
-    //     setIsLoading(true); // Set loading state
-
-    //     try {
-    //         console.log(nickName)
-    //         // Update Redux store after successful API call
-    //         await update(currentUser.UserId,nickName);
-
-    //     } catch (error) {
-    //         console.error('Error registering:', error);
-    //         alert('Registration failed. Please try again.');
-    //     } finally {
-    //         setIsLoading(false); // Reset loading state
-    //     }
-    // };
-
-    // Conditionally render the form
     if (!currentUser) {
         return <div>Loading...</div>; // Or a more informative message
     }
-
 
     return (
         <>
             <HeaderComp />
             <div className='usernteamnames'>
-                <Box sx={{ textAlign: 'center', display: 'flex', width: '30em', alignContent: 'center' }}>
+                <Box sx={{ textAlign: 'center', display: 'flex', width: '30em', alignContent: 'center',ml:7 }}>
                     <Avatar
                         alt="User Avatar"
                         src={avatar}
@@ -123,17 +90,6 @@ function Profile() {
                         {isEditing ? (isLoading ? 'Saving...' : 'Save') : 'Edit'}
                     </Button>
                 </Box>
-                {/* <Box sx={{ textAlign: 'center', display: 'flex', width: '2em', alignSelf: 'flex-end', color: 'white',mb:2}}>
-                    
-                    <Button
-                        variant="contained"
-                        disabled={isLoading} // Блокируем кнопку при загрузке
-                        onClick={isEditing ? handleSave : () => setIsEditing(true)}
-                        sx={{backgroundColor:'rgb(70,70,70)'}}
-                    >
-                        {isEditing ? (isLoading ? 'Saving...' : 'Save') : 'Edit'}
-                    </Button>
-                </Box> */}
                 <Box sx={{ textAlign: 'center', display: 'flex', width: '30em', alignContent: 'center' }}>
                     <Typography variant="h6" sx={{ fontSize: '64px', alignContent: 'center', color: 'white', ml: 2 }}>
                         Nivea
@@ -145,7 +101,11 @@ function Profile() {
                     />
                 </Box>
             </div>
-        <GetTeamsinProf userId={currentUser.UserId}/>
+            <Box sx={{display:"flex"}}>
+                <GetTeamsinProf userId={currentUser.UserId}/>
+                <GetMatchesinProf userId={currentUser.UserId}/>
+            </Box>
+        
         </>
     );
 }
