@@ -1,6 +1,7 @@
 import HeaderComp from "../../Components/HeaderComp/HeaderComp";
 import MatchInfo from "../../Components/MatchInfo/MatchInfo";
 import { useParams } from 'react-router-dom'; // Import useParams
+import Footer from '../../Components/Footer/Footer'
 
 function Match() {
     const { matchId } = useParams();
@@ -9,6 +10,7 @@ function Match() {
         <>
             <HeaderComp/>
             <MatchInfo/>
+            <Footer/>
         </>
     )
 }

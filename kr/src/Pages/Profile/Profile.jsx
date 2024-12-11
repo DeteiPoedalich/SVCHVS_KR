@@ -10,6 +10,7 @@ import { update } from "../../http/userAPI"; // Импорт функции API
 import GetTeamsinProf from '../../Components/GetTeamsInProf/GetTeamsInProf';
 import GetMatchesinProf from '../../Components/GetMatchesInProf/GetMatchesInProf';
 import './Profile.css';
+import Footer from '../../Components/Footer/Footer'
 
 function Profile() {
     const location = useLocation();
@@ -105,7 +106,7 @@ function Profile() {
                 <GetTeamsinProf userId={currentUser.UserId}/>
                 <GetMatchesinProf userId={currentUser.UserId}/>
             </Box>
-        
+        <Footer/>
         </>
     );
 }

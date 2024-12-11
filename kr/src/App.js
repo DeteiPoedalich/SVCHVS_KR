@@ -7,6 +7,7 @@ import Hero from './Pages/Hero/Hero.jsx'
 import Auth from './Pages/Auth/Auth.jsx';
 import Profile from './Pages/Profile/Profile.jsx';
 import Match from './Pages/Match/Match.jsx';
+import Teams from './Pages/Teams/Teams.jsx';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <Route path="/" element={<HomePage/>} />
           <Route path="/heroes" element={<Heroes/>} />
           <Route path="/items" element={<Items/>} />
-          <Route path="/teams" element={<HomePage/>} />
+          <Route path="/teams" element={<Teams/>} />
           <Route path="/hero/:HeroId" element={<Hero/>} />
           <Route path="/login" element={<Auth/>}/>
           <Route path="/profile" element={<Profile/>}/>

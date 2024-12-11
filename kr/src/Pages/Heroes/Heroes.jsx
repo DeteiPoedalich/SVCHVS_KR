@@ -1,5 +1,6 @@
 import HeaderComp from '../../Components/HeaderComp/HeaderComp'
 import HeroByAttribute from '../../Components/HeroByAttribute/HeroByAttribute'
+import Footer from '../../Components/Footer/Footer'
 import "./Heroes.css"
 
 export default function Heroes(){
@@ -12,6 +13,7 @@ export default function Heroes(){
                 <HeroByAttribute text="INTELLIGENCE" img="http://localhost:5000/hero_intelligence.png"/>
                 <HeroByAttribute text="UNIVERSAL" img="http://localhost:5000/hero_universal.png"/>
             </div>
+            <Footer/>
         </>
     )
 }
