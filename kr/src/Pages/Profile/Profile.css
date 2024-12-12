@@ -17,6 +17,7 @@ footer{
     margin-top: 5em;
     gap: 2em;
     box-shadow: 0 -2em 2em rgb(41, 41, 41) ;
+    align-self: flex-end;
 }
 footer img{
     width: 60px;
