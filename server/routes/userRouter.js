@@ -8,7 +8,7 @@ router.post('/login',UserController.login)
 router.post('/logout',UserController.logout)
 router.get('/refresh',UserController.refresh)
 router.get('/users',UserController.getUsers)
-router.get('/profile/:id', authMiddleWare, UserController.getProfile);
+router.get('/profile/:id',authMiddleWare,  UserController.getProfile);
 router.put('/update/:id',  UserController.update);
 router.get('/auth',UserController.check)
 

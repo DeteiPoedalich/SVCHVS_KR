@@ -104,30 +104,9 @@ class UserController{
             return next(e);
         }
     }
-    // async update(req, res, next) {
-    //     try {
-    //         const userId =req.params;
-    //         // return res.status(500).json(userId)
-    //         const { NickName } = req.body;
-    //         const avatar=req.file
-    //         console.error(avatar)
-    //         const fileName = uuidv4() + path.extname(avatar.originalname);
-    //         fs.rename(avatar.path, (path.resolve(__dirname, '..', 'static', fileName)));
-    //         //await avatar.mv(path.resolve(__dirname, '..', 'static', fileName));
-    //         // fs.copyFileSync(avatar,(path.resolve(__dirname, '..', 'static', fileName)))
-    //         console.log("avatarUrl")
-    //         const updatedUser = await UserService.updateUser(userId.id, NickName, fileName);
-    //         return res.json(updatedUser);
-    //     } catch (e) {
-
-    //         console.error("Update User Error:", e);
-    //         return next(e)
-    //     }
-    // }
     async update(req, res, next) {
         try {
             const user =req.params;
-            // return res.status(500).json(userId)
             const NickName= req.body
             console.log(NickName+"cont")
             console.error(user+"cont")

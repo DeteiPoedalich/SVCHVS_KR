@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -6,38 +6,53 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import HeaderComp from '../../Components/HeaderComp/HeaderComp';
-import { update } from "../../http/userAPI"; // Импорт функции API
+import { update } from "../../http/userAPI";
 import GetTeamsinProf from '../../Components/GetTeamsInProf/GetTeamsInProf';
 import GetMatchesinProf from '../../Components/GetMatchesInProf/GetMatchesInProf';
 import './Profile.css';
-import Footer from '../../Components/Footer/Footer'
+import Footer from '../../Components/Footer/Footer';
+import { fetchTeam } from '../../http/teamsAPI';
 
 function Profile() {
     const location = useLocation();
     const { avatarUrl, isLoggedIn, currentUser } = location.state || {};
-    
+
     const [nickName, setNickName] = useState(currentUser?.NickName || '');
     const [avatar, setAvatar] = useState(avatarUrl || '/placeholder-avatar.png');
     const [isEditing, setIsEditing] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    
+    const [team, setTeam] = useState(null);  // Initialize as null
+    const [teamLoading, setTeamLoading] = useState(true); // Loading state for team
 
-    if (!isLoggedIn) {
-        return (
-            <Box sx={{ textAlign: 'center', mt: 5 }}>
-                <Typography variant="h6">You are not logged in.</Typography>
-            </Box>
-        );
-    }
+    useEffect(() => {
+        let isMounted = true; // Flag to prevent state updates after unmount
+        if (currentUser && currentUser.CurrentTeamId) {
+            setTeamLoading(true); // Set loading to true before fetching
+            const fetchTeamDetails = async () => {
+                try {
+                    const fetchedTeam = await fetchTeam(currentUser.CurrentTeamId);
+                    if (isMounted) { // Check if component is still mounted
+                        setTeam(fetchedTeam);
+                        setTeamLoading(false); // Set loading to false after fetching
+                    }
+                } catch (error) {
+                    console.error("Error fetching team details:", error);
+                    if (isMounted) {
+                        setTeam(null);
+                        setTeamLoading(false);
+                    }
+                }
+            };
+            fetchTeamDetails();
+        } else {
+            // If no CurrentTeamId, set loading to false and team to null
+            setTeamLoading(false);
+            setTeam(null);
+        }
+        return () => { isMounted = false; }; // Cleanup function
+    }, [currentUser]);
 
-    if (!currentUser) {
-        return (
-            <Box sx={{ textAlign: 'center', mt: 5 }}>
-                <Typography variant="h6">Loading user information...</Typography>
-            </Box>
-        );
-    }
-    
+    console.log(team)
     const handleSave = async () => {
         console.log(avatar)
         setIsLoading(true);
@@ -92,15 +107,27 @@ function Profile() {
                     </Button>
                 </Box>
                 <Box sx={{ textAlign: 'center', display: 'flex', width: '30em', alignContent: 'center' }}>
-                    <Typography variant="h6" sx={{ fontSize: '64px', alignContent: 'center', color: 'white', ml: 2 }}>
-                        Nivea
+                {teamLoading ? ( // Show loading message while fetching
+                    <Typography variant="h6" sx={{ fontSize: '64px', color: 'white', ml: 2 }}>
+                        Loading Team...
                     </Typography>
-                    <Avatar
-                        alt="Team Avatar"
-                        src="http://localhost:5000/nivea.jpg"
-                        sx={{ width: 150, height: 150, margin: '0 auto' }}
-                    />
-                </Box>
+                ) : team ? ( // Show team details if team is fetched
+                    <>
+                        <Typography variant="h6" sx={{ fontSize: '64px', color: 'white', ml: 2 ,display:'flex',alignItems:'center'}}>
+                            {team.TeamName}
+                        </Typography>
+                        <Avatar
+                            alt="Team Avatar"
+                            src={`http://localhost:5000/${team.TeamImg}` || "http://localhost:5000/nivea.jpg"}
+                            sx={{ width: 150, height: 150, margin: '0 auto' }}
+                        />
+                    </>
+                ) : ( // Show "No Team" if team is null
+                    <Typography variant="h6" sx={{ fontSize: '64px', color: 'white', ml: 2 }}>
+                        No Team
+                    </Typography>
+                )}
+            </Box>
             </div>
             <Box sx={{display:"flex"}}>
                 <GetTeamsinProf userId={currentUser.UserId}/>

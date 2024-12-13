@@ -23,7 +23,7 @@ export const refresh=async(NickName, password) => {
     return data;
 };
 export const getProfile=async(userId) => {
-    const { data } = await $host.get(`http://localhost:5000/api/user/${userId}`); // Store the token
+    const { data } = await $host.get(`http://localhost:5000/api/user/profile/${userId}`); // Store the token
     return data;
 };
 export const update = async (UserId, NickName ) => { // Accept avatar as a File object
