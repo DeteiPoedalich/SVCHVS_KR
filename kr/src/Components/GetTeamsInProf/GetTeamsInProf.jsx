@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { fetchTeam } from '../../http/teamsAPI';
 import { getProfile } from '../../http/userAPI';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function GetTeamsinProf({ userId }) { // Receive userId as a prop
     const location = useLocation();
@@ -75,13 +76,6 @@ useEffect(() => {
         fetchTeamDetails();
     }, [teamIds]); // Add user as a dependency
 
-    if (!isLoggedIn) { // Check login status FIRST
-        return (
-            <Box sx={{ textAlign: 'center', mt: 5 }}>
-                <Typography variant="h6">You are not logged in.</Typography>
-            </Box>
-        );
-    }
     console.log(teams)
 
 
@@ -98,7 +92,7 @@ return (
             Teams played in
         </Typography>
         {teams.map((team, index) => ( // Add index as a second argument
-            
+            <Link to={`/teams/${team.TeamId}`}>
             <Box
                 key={team.TeamId || index} // Use TeamId if available, otherwise index
                 sx={{ display: 'flex', alignItems: 'center', width: '20em', mt: 2, mb: 2 }}
@@ -112,6 +106,7 @@ return (
                     {team.TeamName}
                 </Typography>
             </Box>
+            </Link>
         ))}
     </Box>
 );

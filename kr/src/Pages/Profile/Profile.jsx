@@ -12,6 +12,7 @@ import GetMatchesinProf from '../../Components/GetMatchesInProf/GetMatchesInProf
 import './Profile.css';
 import Footer from '../../Components/Footer/Footer';
 import { fetchTeam } from '../../http/teamsAPI';
+import { Link } from 'react-router-dom';
 
 function Profile() {
     const location = useLocation();
@@ -106,13 +107,14 @@ function Profile() {
                         {isEditing ? (isLoading ? 'Saving...' : 'Save') : 'Edit'}
                     </Button>
                 </Box>
-                <Box sx={{ textAlign: 'center', display: 'flex', width: '30em', alignContent: 'center' }}>
+                <Box sx={{ textAlign: 'center', display: 'flex',width:"auto", alignContent: 'center',mr:5 }}>
                 {teamLoading ? ( // Show loading message while fetching
                     <Typography variant="h6" sx={{ fontSize: '64px', color: 'white', ml: 2 }}>
                         Loading Team...
                     </Typography>
                 ) : team ? ( // Show team details if team is fetched
-                    <>
+                    <Link to={`/teams/${team.TeamId}`}>
+                    <Box sx={{display:"flex", gap:"2em",width:"auto"}}>
                         <Typography variant="h6" sx={{ fontSize: '64px', color: 'white', ml: 2 ,display:'flex',alignItems:'center'}}>
                             {team.TeamName}
                         </Typography>
@@ -121,7 +123,9 @@ function Profile() {
                             src={`http://localhost:5000/${team.TeamImg}` || "http://localhost:5000/nivea.jpg"}
                             sx={{ width: 150, height: 150, margin: '0 auto' }}
                         />
-                    </>
+                        </Box>
+                    </Link>
+                    
                 ) : ( // Show "No Team" if team is null
                     <Typography variant="h6" sx={{ fontSize: '64px', color: 'white', ml: 2 }}>
                         No Team

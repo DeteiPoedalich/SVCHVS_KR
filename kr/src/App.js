@@ -8,6 +8,8 @@ import Auth from './Pages/Auth/Auth.jsx';
 import Profile from './Pages/Profile/Profile.jsx';
 import Match from './Pages/Match/Match.jsx';
 import Teams from './Pages/Teams/Teams.jsx';
+import Team from './Pages/Team/Team.jsx'
+import AddMatchPage from './Pages/AddMatch/AddMatch.jsx';
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route path="/login" element={<Auth/>}/>
           <Route path="/profile" element={<Profile/>}/>
           <Route path="/match/:matchId" element={<Match/>}/>
+          <Route path="/teams/:TeamId" element={<Team/>}></Route>
+          <Route path="/addmatch" element={<AddMatchPage/>}></Route>
         </Routes>
      </BrowserRouter>
     </>

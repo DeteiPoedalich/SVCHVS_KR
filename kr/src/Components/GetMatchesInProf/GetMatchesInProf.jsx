@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import { fetchPIM } from '../../http/pimAPI';
 import MatchInprof from '../MatchInprof/MatchInProf';
 import { Link } from 'react-router-dom'
+import { Button } from '@mui/material';
 
 function GetMatchesinProf(userId) { // Correctly use useParams
     const [matches, setMatches] = useState([]);
@@ -47,6 +48,7 @@ function GetMatchesinProf(userId) { // Correctly use useParams
                 <MatchInprof key={match.id || index} match={match} />
             </Link> 
             ))}
+            <Link to="/addmatch"><Button sx={{width:"10%",alignSelf:"end",color:"white"}}>Add Match</Button></Link>
         </Box>
     );
 }

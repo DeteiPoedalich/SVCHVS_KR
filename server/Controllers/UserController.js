@@ -1,6 +1,6 @@
 const ApiError = require("../error/ApiError");
 const bcrypt = require("bcrypt");
-const { User } = require("../models/models");
+const { User,Team } = require("../models/models");
 const  UserService = require('../services/user-service');
 const jwt = require('jsonwebtoken'); // Import jwt
 const {validationResult}=require('express-validator');
@@ -82,7 +82,25 @@ class UserController{
             next(e)
         }
     }
-
+    async getUsersByTeamId(req,res,next){
+            try {
+                const { CurrentTeamId } = req.query;
+        
+                const whereClause = {};
+        
+                // Correctly apply the CurrentTeamId filter if provided
+                if (CurrentTeamId) {
+                    whereClause.CurrentTeamId = parseInt(CurrentTeamId); // Important: Parse to integer!
+                }
+        
+                const users = await User.findAll({ where: whereClause });
+                res.json(users);
+        
+            } catch (error) {
+                console.error("Error fetching users:", error);
+                res.status(500).json({ message: "Error fetching users" });
+            }
+    }
     async check(req,res,next){
         const token=generateJwt(req.user.UserId, req.user.NickName, req.user.role)
         return res.json(token)
@@ -120,11 +138,61 @@ class UserController{
             return next(e)
         }
     }
+    async getUsersByNickName(req, res) {
+        try {
+            const { NickName } = req.query; // Извлекаем NickName из запроса
+            if (!NickName) {
+                return res.status(400).json({ message: "NickName parameter is required." });
+            }
     
+            // Ищем пользователя по NickName в базе данных
+            const users = await User.findAll({
+                where: {
+                    NickName: NickName // Убедитесь, что поле в модели называется так же
+                }
+            });
     
+            if (users.length === 0) {
+                return res.status(404).json({ message: "User not found." });
+            }
     
+            res.json(users);
+        } catch (error) {
+            console.error("Error fetching users by NickName:", error);
+            res.status(500).json({ message: "Internal server error." });
+        }
+    };
+    async JoinTeam(req, res) {
+        const { teamId } = req.body; // Get teamId from request body
+        const {userId} = req.params; // Get userId from authenticated user (assuming authMiddleware)
     
+        try {
+            const user = await User.findOne({ where: { UserId: userId } });
+            if (!user) {
+                return res.status(404).json({ error: 'User not found' });
+            }
     
+            const team = await Team.findOne({ where: { TeamId: teamId } });
+            if (!team) {
+                return res.status(404).json({ error: 'Team not found' });
+            }
+    
+            // Update User's CurrentTeamId and TeamList
+            let teamList = user.TeamList ? user.TeamList.split(' ').map(Number) : []; // Use array for TeamList
+    
+            if (!teamList.includes(teamId)) {
+                teamList.push(teamId);
+            }
+    
+            await user.update({ CurrentTeamId: teamId, TeamList: teamList.join(' ') }); // Convert back to string for storage
+    
+            res.status(200).json({ message: 'Successfully joined team', user }); // Return updated user data
+        } catch (error) {
+            console.error("Error joining team:", error);
+            res.status(500).json({ error: 'Failed to join team' });
+        }
+    };
+        
 }
 
 module.exports=new UserController()

@@ -1,6 +1,8 @@
 import { Box } from "@mui/material";
 import { fetchTeams } from "../../http/teamsAPI";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import {Button} from "@mui/material";
 
 export default function TeamsComp() {
     const [teams, setTeams] = useState([]); // Initialize as an empty array
@@ -28,19 +30,22 @@ export default function TeamsComp() {
         <Box sx={{
             width: "100%",
             display: "flex",
-            justifyContent: 'center', // Add some gap between team boxes
+            justifyContent: 'center', 
         }}>
         <Box sx={{
             width: "80%",
             display: "flex",
-            justifyContent: 'center',
+            alignContent: 'center',
             flexWrap: "wrap",
+            flexDirection:"column",
             mt: 5,
             mb: 5,
-            gap: 2 // Add some gap between team boxes
+            gap: 2 
         }}>
+            <Box sx={{display:"flex"}}>
             {teams.map(team => (
-                <Box key={team.TeamId} sx={{ // Add key prop for efficient rendering
+                <Link to={`${team.TeamId}`}>               
+                <Box key={team.TeamId} sx={{ 
                     width: "300px",
                     height: "300px",
                     display: "flex",
@@ -55,8 +60,13 @@ export default function TeamsComp() {
                     />
                     <p style={{ fontSize: 24 }}>{team.TeamName}</p>
                 </Box>
+                </Link>
             ))}
+            </Box>
+            <Button sx={{width:"10%",alignSelf:"end"}}>Create Team</Button>
+            
         </Box>
+        
         </Box>
     );
 }

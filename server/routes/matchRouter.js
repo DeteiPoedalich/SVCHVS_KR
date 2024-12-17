@@ -6,5 +6,8 @@ router.post('/',matchController.create)
 router.get('/',matchController.getAll)
 router.get('/',matchController.getSome)
 router.get('/:matchId',matchController.getOne)
+router.put('/:matchId',matchController.update)
+
+
 
 module.exports=router

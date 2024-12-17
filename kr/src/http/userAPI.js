@@ -26,6 +26,32 @@ export const getProfile=async(userId) => {
     const { data } = await $host.get(`http://localhost:5000/api/user/profile/${userId}`); // Store the token
     return data;
 };
+
+export const getUsers=async() => {
+    const { data } = await $host.get(`http://localhost:5000/api/user/users`); // Store the token
+    return data;
+};
+export const getUsersByTeam = async (params = {}) => {
+    try {
+        const { where } = params; // Extract where clause
+        let url = `http://localhost:5000/api/user/users/`;
+
+        if (where) {
+            // Construct query string for where clause
+            const queryParams = Object.entries(where)
+                .map(([key, value]) => `${key}=${value}`)
+                .join('&');
+            url += `?${queryParams}`;
+        }
+
+
+        const { data } = await $host.get(url);
+        return data;
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        throw error;
+    }
+};
 export const update = async (UserId, NickName ) => { // Accept avatar as a File object
     try {
         console.log(NickName)

@@ -62,16 +62,16 @@ const Skill = sequelize.define('Skill',{
 
 const Match = sequelize.define('Match',{
     MatchId:{type:DataTypes.INTEGER, primaryKey:true, autoIncrement: true},
-    PlayerId1:{type : DataTypes.INTEGER, allowNull: false},
-    PlayerId2:{type : DataTypes.INTEGER, allowNull: false},
-    PlayerId3:{type : DataTypes.INTEGER, allowNull: false},
-    PlayerId4:{type : DataTypes.INTEGER, allowNull: false},
-    PlayerId5:{type : DataTypes.INTEGER , allowNull: false},
-    PlayerId6:{type : DataTypes.INTEGER , allowNull: false},
-    PlayerId7:{type : DataTypes.INTEGER , allowNull: false},
-    PlayerId8:{type : DataTypes.INTEGER , allowNull: false},
-    PlayerId9:{type : DataTypes.INTEGER , allowNull: false},
-    PlayerId10:{type : DataTypes.INTEGER , allowNull: false},
+    PlayerId1:{type : DataTypes.INTEGER},
+    PlayerId2:{type : DataTypes.INTEGER},
+    PlayerId3:{type : DataTypes.INTEGER},
+    PlayerId4:{type : DataTypes.INTEGER},
+    PlayerId5:{type : DataTypes.INTEGER },
+    PlayerId6:{type : DataTypes.INTEGER },
+    PlayerId7:{type : DataTypes.INTEGER },
+    PlayerId8:{type : DataTypes.INTEGER },
+    PlayerId9:{type : DataTypes.INTEGER },
+    PlayerId10:{type : DataTypes.INTEGER },
 })
 
 const PlayerInMatch = sequelize.define('PlayerInMatch',{

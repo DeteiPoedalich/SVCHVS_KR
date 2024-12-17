@@ -5,5 +5,6 @@ const PlayerInMatchController=require("../Controllers/playerInMatchController")
 router.post('/',PlayerInMatchController.create)
 router.get('/:userId', PlayerInMatchController.getOne);
 router.get('/inmatch/:matchId', PlayerInMatchController.getSome) 
+router.put('/:playerId',PlayerInMatchController.update)
 
 module.exports=router
