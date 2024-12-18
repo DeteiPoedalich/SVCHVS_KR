@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import Skills from "../Skills/Skills"
 import SkillBuild from "../SkillBuild/SkillBuild";
 import ItemBuild from "../ItemBuild/ItemBuild";
+import HeroReport from '../HeroReport/HeroReport';
 
 export default function HeroInfomation(){
     const { HeroId } = useParams();
@@ -13,7 +14,8 @@ export default function HeroInfomation(){
             <div className='HeroInformation'>
                 <HeroNameEtc heroId={parseInt(HeroId)}/>
                 <Skills heroId={parseInt(HeroId)} className1="SkillsForDisplay" className2="SkillForDisplay"/>
-                <SkillBuild buildId={parseInt(HeroId)}/>               
+                <SkillBuild buildId={parseInt(HeroId)}/> 
+                <HeroReport heroId={HeroId}/>               
             </div>
         </>
     )

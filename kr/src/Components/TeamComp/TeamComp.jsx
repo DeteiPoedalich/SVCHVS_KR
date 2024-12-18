@@ -117,9 +117,9 @@ export default function TeamComp(props) {
     console.log(user)
 
     return (
-    <Box sx={{display:"flex",flexDirection:"column",gap:"3em",alignItems:"center"}}>
-        <Box sx={{width:"100%"}}>
-            <Box sx={{ textAlign: 'center', display: 'flex', width: '30em', alignContent: 'center',ml:7 }}>
+    <Box sx={{display:"flex",flexDirection:"column",gap:"3em"}}>
+        <Box sx={{display:"flex",alignItems:"center"}} >
+            <Box sx={{ textAlign: 'center', display: 'flex', width: 'auto',ml:7,alignSelf:"start" }}>
                 <Avatar
                     alt="User Avatar"
                     src={props.team && props.team.TeamImg ? `http://localhost:5000/${props.team.TeamImg}` : 'http://localhost:5000/nivea.jpg'}
@@ -132,8 +132,8 @@ export default function TeamComp(props) {
             </Box>
             
         </Box>
-        <Box sx={{width:"40%",display:"flex",flexDirection:'column',alignItems:"center"}}>
-            <Typography sx={{fontSize:48}}>
+        <Box sx={{width:"40%",display:"flex",flexDirection:'column',alignSelf:"center"}}>
+            <Typography sx={{fontSize:48,textAlign:"center"}}>
                 Team Members
             </Typography>
             <Box sx={{display:"flex",gap:"2em",flexWrap:"wrap",justifyContent:"center"}}> 

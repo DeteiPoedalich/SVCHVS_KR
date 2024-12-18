@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import "../SkillBuild/SkillBuid.css";
 import ItemBuildComponent from "../ItemBuildComponent/ItemBuildComponent";
+import HeroReport from '../HeroReport/HeroReport';
 
 const ItemBuild = ({ buildId }) => {
     const [itemIds, setItemIds] = useState([]); // Store item IDs

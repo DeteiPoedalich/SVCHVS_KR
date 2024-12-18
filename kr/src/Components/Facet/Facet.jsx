@@ -9,7 +9,7 @@ const Facet = ({ color,text,description }) => {
                 <div style={{ backgroundColor: color }} className='OnHover' onMouseEnter={() => setIsShown(true)}
                 onMouseLeave={() => setIsShown(false)}>
                     <div className='Hover'>
-                        <p>{text}</p>
+                        <p style={{marginLeft:"5px"}}>{text}</p>
                     </div>
                     <div className='Hover-description'>
                         <p>{description}</p>

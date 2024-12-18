@@ -10,6 +10,7 @@ import Match from './Pages/Match/Match.jsx';
 import Teams from './Pages/Teams/Teams.jsx';
 import Team from './Pages/Team/Team.jsx'
 import AddMatchPage from './Pages/AddMatch/AddMatch.jsx';
+import ViewAllUsers from './Pages/ViewAllUsers/ViewAllUsers.jsx'
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
           <Route path="/match/:matchId" element={<Match/>}/>
           <Route path="/teams/:TeamId" element={<Team/>}></Route>
           <Route path="/addmatch" element={<AddMatchPage/>}></Route>
+          <Route path="/addmatch" element={<AddMatchPage/>}></Route>
+          <Route path="/viewusers" element={<ViewAllUsers/>}></Route>
         </Routes>
      </BrowserRouter>
     </>

@@ -8,6 +8,7 @@ router.post('/login',UserController.login)
 router.post('/logout',UserController.logout)
 router.get('/refresh',UserController.refresh)
 router.get('/users',UserController.getUsersByTeamId)
+router.get('/allusers',UserController.getUsers)
 router.get('/', UserController.getUsersByNickName);
 router.get('/profile/:id',authMiddleWare, UserController.getProfile);
 router.put('/update/:id',  UserController.update);

@@ -14,6 +14,9 @@ class TeamController{
                 fileName = uuid.v4() + ".jpg";
                 TeamImg.mv(path.resolve(__dirname, '..', 'static', fileName));
             }
+            else{
+                fileName="sema.jpg";
+            }
     
             const team = await Team.create({ TeamName, TeamImg: fileName }); // Use fileName (which might be null)
             return res.json(team);

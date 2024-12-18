@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -17,14 +17,16 @@ import { Link } from 'react-router-dom';
 function Profile() {
     const location = useLocation();
     const { avatarUrl, isLoggedIn, currentUser } = location.state || {};
-
+    const navigate = useNavigate();
     const [nickName, setNickName] = useState(currentUser?.NickName || '');
     const [avatar, setAvatar] = useState(avatarUrl || '/placeholder-avatar.png');
     const [isEditing, setIsEditing] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [team, setTeam] = useState(null);  // Initialize as null
     const [teamLoading, setTeamLoading] = useState(true); // Loading state for team
-
+    const handleViewAllUsers = () => {
+        navigate('/viewusers'); // Navigate to the users page
+    };
     useEffect(() => {
         let isMounted = true; // Flag to prevent state updates after unmount
         if (currentUser && currentUser.CurrentTeamId) {
@@ -53,14 +55,10 @@ function Profile() {
         return () => { isMounted = false; }; // Cleanup function
     }, [currentUser]);
 
-    console.log(team)
     const handleSave = async () => {
-        console.log(avatar)
         setIsLoading(true);
         try {
             const updatedUser = await update(currentUser.UserId,nickName, avatar);
-            console.log('Updated User:', updatedUser);
-            console.log(nickName)
             alert('Profile updated successfully!');
             setIsEditing(false);
             
@@ -131,12 +129,17 @@ function Profile() {
                         No Team
                     </Typography>
                 )}
-            </Box>
+            </Box>           
             </div>
             <Box sx={{display:"flex"}}>
                 <GetTeamsinProf userId={currentUser.UserId}/>
                 <GetMatchesinProf userId={currentUser.UserId}/>
             </Box>
+             {currentUser && currentUser.role == 'ADMIN' && ( // Conditionally render the button
+                <Button sx={{width:"10em",alignSelf:"end",mr:5,backgroundColor:"rgb(41,41,41)"}} variant="contained" onClick={handleViewAllUsers}>
+                    View All Users
+                </Button>
+            )}
         <Footer/>
         </>
     );

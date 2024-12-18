@@ -3,6 +3,7 @@ import "../SkillBuild/SkillBuid.css";
 import Skills from '../Skills/Skills';
 import ItemBuild from '../ItemBuild/ItemBuild';
 
+
 const SkillBuild = ({ buildId }) => {
     const [skills, setSkills] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -71,6 +72,7 @@ const SkillBuild = ({ buildId }) => {
                 <p className='ItemBuildP'>Usual Build</p>
                 <ItemBuild buildId={parseInt(buildId)}/>
             </div>
+            
         </div>
     );
 };
