@@ -133,8 +133,8 @@ const AddMatchPage = () => {
             {error && <Typography color="error">{error}</Typography>}
             <Grid2 container spacing={1} sx={{ display: "flex", width: "100%", justifyContent: "center" }}>
                 {players.map((player, index) => (
-                    <Grid2 item xs={12} key={index} sx={{ width: "53%", backgroundColor: "rgb(41,41,41)", mb: 1 }}>
-                        <Grid2 container spacing={2} sx={{ width: "100%" , display: "grid", gridTemplateColumns: "0.5fr 0.5fr 0.1fr 0.1fr 0.1fr 0.4fr", gridAutoColumns:1}}>
+                    <Grid2 item xs={12} key={index} sx={{ width: {xs:"99%",sm:"90%",md:"70%",lg:"53%"}, backgroundColor: "rgb(41,41,41)", mb: 1 }}>
+                        <Grid2 container spacing={1} sx={{ width: "100%" , display: "grid", gridTemplateColumns: {xs:"0.5fr 0.5fr 0.5fr",sm:"0.5fr 0.5fr 0.2fr 0.2fr 0.2fr 0.4fr",lg:"0.5fr 0.5fr 0.1fr 0.1fr 0.1fr 0.4fr"}, gridAutoColumns:1}}>
                             <Grid2 item xs={6}>
                                 <TextField
                                     label="Player Name"
@@ -193,7 +193,7 @@ const AddMatchPage = () => {
                     </Grid2>
                 ))}
             </Grid2>
-            <Button variant="contained" onClick={handleSubmit} sx={{ mt: 1, width: "10%"}}>Create Match</Button>
+            <Button variant="contained" onClick={handleSubmit} sx={{ mt: 1, width: "20%"}}>Create Match</Button>
         </Box>
         <Footer/>
         </>

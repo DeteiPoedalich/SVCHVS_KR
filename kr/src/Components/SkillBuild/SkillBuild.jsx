@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import "../SkillBuild/SkillBuid.css";
 import Skills from '../Skills/Skills';
 import ItemBuild from '../ItemBuild/ItemBuild';
+import {Box} from "@mui/material"
 
 
 const SkillBuild = ({ buildId }) => {
@@ -62,18 +63,19 @@ const SkillBuild = ({ buildId }) => {
     }
 
     return (
-        <div className="skill-build-with-skills">
-            <Skills heroId={parseInt(buildId)} className1="SkillsForBuild" className2="SkillForBuild"/>
-            <div className="skill-build">
-                {skills}
-                
-            </div>
-            <div className='ItemsBuild'>
+        <Box className="skill-build-with-skills">
+            <Box className="gugug">
+                <Skills heroId={parseInt(buildId)} className1="SkillsForBuild" className2="SkillForBuild"/>
+                <Box className="skill-build">                   
+                    {skills}                   
+                </Box>
+            </Box>
+            <Box className='ItemsBuild'>
                 <p className='ItemBuildP'>Usual Build</p>
                 <ItemBuild buildId={parseInt(buildId)}/>
-            </div>
+            </Box>
             
-        </div>
+        </Box>
     );
 };
 

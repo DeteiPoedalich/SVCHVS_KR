@@ -32,7 +32,7 @@ const ItemBuildComponent = observer(({ itemIds }) => {
     }, [itemIds]);
 
     return (
-        <div>
+        <div className='papapa'>
             <div className="ItemsForBuild">
                 {items.map(item => (
                     <ItemIcon key={item.ItemId} item={item} img={item.ItemImg} />

@@ -1,6 +1,6 @@
 .auth-container {
     background-color: white;
-    padding: 20px;
+    padding: 8px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -34,7 +34,7 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    width: 100%; /* Make buttons full width */
+    width: 90%; /* Make buttons full width */
     margin-bottom: 10px; /* Add spacing between buttons */
 }
 

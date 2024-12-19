@@ -71,12 +71,13 @@ function MatchInfo() {
 
     const renderPlayerRow = (player) => (
         <Box key={player.id} sx={{
-            display: "grid",
-            gridTemplateColumns: "0.2fr 0.5fr 0.05fr 0.05fr 0.05fr 1fr",
-            gridAutoRows: "67px",
+            display: {xs:"flex",sm:"grid"},
+            gridTemplateColumns:{sm:"0.2fr 0.5fr 0.5fr 0.5fr 0.5fr",md:"0.2fr 0.5fr 0.05fr 0.05fr 0.05fr 1fr",lg:"0.2fr 0.5fr 0.05fr 0.05fr 0.05fr 1fr"},
+            gridAutoRows: "auto",
             backgroundColor: "#4E4E4E",
             alignItems: "center",
             pl: 1,
+            flexWrap:{xs:"wrap"},
             width: "70%"
         }}>
             {player.hero ? (
@@ -88,22 +89,22 @@ function MatchInfo() {
                         <Typography sx={{ fontSize: 32, m: 0 }}>{player.PlayerName}</Typography>
                         <Typography>{player.hero.HeroName}</Typography>
                     </Box>
-                    <Box sx={{pl:1, display:"flex",flexDirection:"column",alignItems:"center"}}>
+                    <Box sx={{pl:1, display:"flex",flexDirection:{xs:"row",sm:"column"},alignItems:"center"}}>
                                  <Typography sx={{fontSize:24,m:0}}>K</Typography>
                                  <Typography sx={{fontSize:24,m:0}}>{player.Kills}</Typography> {/* Access HeroName */}
-                         </Box>
-                       <Box sx={{pl:1, display:"flex",flexDirection:"column",alignItems:"center"}}>
+                    </Box>
+                    <Box sx={{pl:1, display:"flex",flexDirection:{xs:"row",sm:"column"},alignItems:"center"}}>
                                  <Typography sx={{fontSize:24,m:0}}>D</Typography>
                                  <Typography sx={{fontSize:24,m:0}}>{player.Deaths}</Typography> {/* Access HeroName */}
-                         </Box>
-                         <Box sx={{pl:1, display:"flex",flexDirection:"column",alignItems:"center"}}>
+                    </Box>
+                    <Box sx={{pl:1, display:"flex",flexDirection:{xs:"row",sm:"column"},alignItems:"center"}}>
                                  <Typography sx={{fontSize:24,m:0}}>A</Typography>
                                  <Typography sx={{fontSize:24,m:0}}>{player.Assists}</Typography> {/* Access HeroName */}
-                         </Box>
-                         <Box sx={{pl:10, display:"flex",alignItems:"center"}}>
+                    </Box>
+                    <Box sx={{pl:10, display:{xs:"none",sm:"none",md:'flex',lg:"flex"},alignItems:"center",flexDirection:"row"}}>
                              <ItemBuild  buildId={player.hero.BuildId}/>
                              <Box sx={{borderRadius:"50px",width:"40px",height:"40px",backgroundColor:"#343434",ml:2}}></Box>
-                         </Box>
+                    </Box>
                 </>
             ) : (
                 <Box>

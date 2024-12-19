@@ -77,70 +77,152 @@ function Profile() {
     return (
         <>
             <HeaderComp />
-            <div className='usernteamnames'>
-                <Box sx={{ textAlign: 'center', display: 'flex', width: '30em', alignContent: 'center',ml:7 }}>
+
+                <div className="usernteamnames">
+                <Box
+                    sx={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        width: { xs: '100%', sm: '35em' },
+                        flexDirection: 'row',
+                        flexWrap:"wrap",
+                        alignItems: 'center',
+                        ml: { xs: 2, sm: 7 }
+                    }}
+                    >
                     <Avatar
                         alt="User Avatar"
                         src={avatar}
-                        sx={{ width: 150, height: 150, margin: '0 auto' }}
+                        sx={{ width: { xs: 100, sm: 150 }, height: { xs: 100, sm: 150 }, margin: '0 auto' }}
                     />
+
                     {isEditing ? (
                         <TextField
-                            value={nickName}
-                            onChange={(e) => setNickName(e.target.value)}
-                            variant="outlined"
-                            sx={{ fontSize: '64px', alignContent: 'center', color: 'white',justifyContent:'center',width:'3em' }}
+                        value={nickName}
+                        onChange={(e) => setNickName(e.target.value)}
+                        variant="outlined"
+                        sx={{
+                            fontSize: { xs: '48px', sm: '64px' },
+                            width: '100%',
+                            textAlign: 'center',
+                            color: 'white',
+                        }}
                         />
                     ) : (
-                        <Typography variant="h6" sx={{ fontSize: '64px', alignContent: 'center', color: 'white', ml: 2 }}>
-                            {nickName}
+                        <Typography
+                        variant="h6"
+                        sx={{
+                            fontSize: { xs: '32px', sm: '64px' },
+                            color: 'white',
+                            ml: { xs: 0, sm: 2 },
+                            textAlign: 'center',
+                        }}
+                        >
+                        {nickName}
                         </Typography>
                     )}
+
                     <Button
                         variant="contained"
-                        disabled={isLoading} // Блокируем кнопку при загрузке
+                        disabled={isLoading}
                         onClick={isEditing ? handleSave : () => setIsEditing(true)}
-                        sx={{ textAlign: 'center', display: 'flex', width: '2em', alignSelf: 'flex-end', color: 'white',mb:2,backgroundColor:"rgb(70,70,70)"}}
+                        sx={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        width: 'auto',
+                        alignSelf: 'flex-end',
+                        color: 'white',
+                        mb: 2,
+                        backgroundColor: 'rgb(70,70,70)',
+                        }}
                     >
                         {isEditing ? (isLoading ? 'Saving...' : 'Save') : 'Edit'}
                     </Button>
-                </Box>
-                <Box sx={{ textAlign: 'center', display: 'flex',width:"auto", alignContent: 'center',mr:5 }}>
-                {teamLoading ? ( // Show loading message while fetching
-                    <Typography variant="h6" sx={{ fontSize: '64px', color: 'white', ml: 2 }}>
-                        Loading Team...
-                    </Typography>
-                ) : team ? ( // Show team details if team is fetched
-                    <Link to={`/teams/${team.TeamId}`}>
-                    <Box sx={{display:"flex", gap:"2em",width:"auto"}}>
-                        <Typography variant="h6" sx={{ fontSize: '64px', color: 'white', ml: 2 ,display:'flex',alignItems:'center'}}>
-                            {team.TeamName}
-                        </Typography>
-                        <Avatar
-                            alt="Team Avatar"
-                            src={process.env.REACT_APP_API_URL+`${team.TeamImg}` || process.env.REACT_APP_API_URL+"nivea.jpg"}
-                            sx={{ width: 150, height: 150, margin: '0 auto' }}
-                        />
+                    </Box>
+
+
+                    <Box
+                        sx={{
+                            textAlign: 'center',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            width: { xs: '100%', sm: 'auto' },
+                            mr: { xs: 2, sm: 5 },
+                        }}
+                        >
+                        {teamLoading ? (
+                            <Typography
+                            variant="h6"
+                            sx={{ fontSize: { xs: '32px', sm: '64px' }, color: 'white', ml: 2 }}
+                            >
+                            Loading Team...
+                            </Typography>
+                        ) : team ? (
+                            <Link to={`/teams/${team.TeamId}`}>
+                            <Box
+                                sx={{
+                                display: 'flex',
+                                gap: { xs: '1em', sm: '2em' },
+                                alignItems: 'center',
+                                }}
+                            >
+                                <Typography
+                                variant="h6"
+                                sx={{
+                                    fontSize: { xs: '32px', sm: '64px' },
+                                    color: 'white',
+                                    ml: { xs: 0, sm: 2 },
+                                }}
+                                >
+                                {team.TeamName}
+                                </Typography>
+                                <Avatar
+                                alt="Team Avatar"
+                                src={process.env.REACT_APP_API_URL + (team.TeamImg || 'nivea.jpg')}
+                                sx={{ width: { xs: 100, sm: 150 }, height: { xs: 100, sm: 150 }, margin: '0 auto' }}
+                                />
+                            </Box>
+                            </Link>
+                        ) : (
+                            <Typography
+                            variant="h6"
+                            sx={{ fontSize: { xs: '32px', sm: '64px' }, color: 'white', ml: 2 }}
+                            >
+                            No Team
+                            </Typography>
+                        )}
                         </Box>
-                    </Link>
+
+                </div>
+
+                <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: { xs: 'column', sm: 'row' },
                     
-                ) : ( // Show "No Team" if team is null
-                    <Typography variant="h6" sx={{ fontSize: '64px', color: 'white', ml: 2 }}>
-                        No Team
-                    </Typography>
-                )}
-            </Box>           
-            </div>
-            <Box sx={{display:"flex"}}>
-                <GetTeamsinProf userId={currentUser.UserId}/>
-                <GetMatchesinProf userId={currentUser.UserId}/>
-            </Box>
-             {currentUser && currentUser.role == 'ADMIN' && ( // Conditionally render the button
-                <Button sx={{width:"10em",alignSelf:"end",mr:5,backgroundColor:"rgb(41,41,41)"}} variant="contained" onClick={handleViewAllUsers}>
+                }}
+                >
+                <GetTeamsinProf userId={currentUser.UserId} />
+                <GetMatchesinProf userId={currentUser.UserId} />
+                </Box>
+
+                {currentUser && currentUser.role === 'ADMIN' && (
+                <Button
+                    sx={{
+                    width: { xs: '80%', sm: '10em' },
+                    alignSelf:{ xs: "center", sm: 'end' },
+                    backgroundColor: 'rgb(41,41,41)',
+                    mr: { xs: 0, sm: 2 },
+                    }}
+                    variant="contained"
+                    onClick={handleViewAllUsers}
+                >
                     View All Users
                 </Button>
-            )}
-        <Footer/>
+                )}
+
+                <Footer />
         </>
     );
 }

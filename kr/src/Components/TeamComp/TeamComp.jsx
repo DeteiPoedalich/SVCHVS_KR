@@ -119,21 +119,42 @@ export default function TeamComp(props) {
     return (
     <Box sx={{display:"flex",flexDirection:"column",gap:"3em"}}>
         <Box sx={{display:"flex",alignItems:"center"}} >
-            <Box sx={{ textAlign: 'center', display: 'flex', width: 'auto',ml:7,alignSelf:"start" }}>
-                <Avatar
-                    alt="User Avatar"
-                    src={props.team && props.team.TeamImg ? process.env.REACT_APP_API_URL+`${props.team.TeamImg}` : process.env.REACT_APP_API_URL+'nivea.jpg'}
-                    sx={{ width: 150, height: 150, margin: '0 auto' }}
-                />
+        <Box 
+    sx={{ 
+        textAlign: 'center', 
+        display: 'flex', 
+        width: 'auto', 
+        alignSelf: "start", 
+        flexWrap: "wrap", 
+        justifyContent: "center", 
+        alignItems: "center" ,
+        ml: { xs: 2, md: 7 },
+        gap:{xs:2,md:7}
+    }}
+>
+    <Avatar
+        alt="User Avatar"
+        src={props.team && props.team.TeamImg ? 
+             `${process.env.REACT_APP_API_URL}${props.team.TeamImg}` : 
+             `${process.env.REACT_APP_API_URL}nivea.jpg`}
+        sx={{ width: 150, height: 150, margin: '0 auto' }}
+    />
+    <Typography 
+        variant="h6" 
+        sx={{ 
+            fontSize: { xs: '36px', sm: '48px', md: '64px' }, // Изменяем размер текста
+            alignContent: 'center', 
+            color: 'white',  // Добавляем отступы слева для больших экранов
+        }}
+    >
+        {props.team.TeamName}
+    </Typography>
+</Box>
 
-                    <Typography variant="h6" sx={{ fontSize: '64px', alignContent: 'center', color: 'white', ml: 2 }}>
-                        {props.team.TeamName}
-                    </Typography>
-            </Box>
             
         </Box>
-        <Box sx={{width:"40%",display:"flex",flexDirection:'column',alignSelf:"center"}}>
-            <Typography sx={{fontSize:48,textAlign:"center"}}>
+        <Box sx={{width:"60%",display:"flex",flexDirection:'column',alignSelf:"center",alignContent:"center"}}>
+            <Typography sx={{fontSize:48,textAlign:"center",width:"100%"}}>
                 Team Members
             </Typography>
             <Box sx={{display:"flex",gap:"2em",flexWrap:"wrap",justifyContent:"center"}}> 

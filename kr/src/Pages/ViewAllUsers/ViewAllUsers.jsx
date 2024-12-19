@@ -85,7 +85,7 @@ function AllUsersPage() {
             <Table sx={{ maxWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow >
-                        <TableCell sx={{color: 'white',borderRight:"solid white 1px"}}>ID</TableCell>
+                        <TableCell sx={{color: 'white',borderRight:"solid white 1px",p:"8px"}}>ID</TableCell>
                         <TableCell sx={{color: 'white',borderRight:"solid white 1px"}} align="right">Nickname</TableCell>
                         <TableCell sx={{color: 'white',borderRight:"solid white 1px"}} align="right">Team Id</TableCell>
                         <TableCell sx={{color: 'white',borderRight:"solid white 1px"}} align="right">Played in teams</TableCell>
@@ -96,7 +96,7 @@ function AllUsersPage() {
                 <TableBody>
                     {users.map((user) => (
                         <TableRow key={user.UserId}>
-                            <TableCell sx={{color: 'white',borderRight:"solid white 1px"}}component="th" scope="row"> {user.UserId}</TableCell>
+                            <TableCell sx={{color: 'white',borderRight:"solid white 1px",p:"8px"}}component="th" scope="row"> {user.UserId}</TableCell>
                             <TableCell sx={{color: 'white',borderRight:"solid white 1px"}}align="right">{user.NickName}</TableCell>
                             <TableCell sx={{color: 'white',borderRight:"solid white 1px"}} align="right">{user.CurrentTeamId}</TableCell>
                             <TableCell sx={{color: 'white',borderRight:"solid white 1px"}} align="right">{user.TeamList}</TableCell>

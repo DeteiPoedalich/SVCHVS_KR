@@ -1,10 +1,34 @@
-.SkillsForDisplay{
+.SkillsForDisplay {
     display: flex;
-    gap:2em;
-    margin:4em 0 0 1.5em;
+    gap: 2em;
+    margin: 4em 0 0 1.5em;
     width: 30%;
     justify-content: center;
 }
+
+@media (max-width: 1200px) {
+    .SkillsForDisplay {
+        width: 50%; /* или любое другое подходящее значение, чтобы адаптироваться */
+    }
+}
+
+@media (max-width: 768px) {
+    .SkillsForDisplay {
+        width: 100%; /* на мобильных устройствах отображаем всю ширину контейнера */
+        margin: 2em 0; /* корректировка маржа */
+    }
+}
+@media (max-width: 430px) {
+    .SkillsForDisplay {
+        width: 100%;
+        gap: 0.7em; /* на мобильных устройствах отображаем всю ширину контейнера */
+    }
+    .SkillsForDisplay .SkillForDisplay{
+        width: 68px;
+        height: 68px; /* на мобильных устройствах отображаем всю ширину контейнера */
+    }
+}
+
 .SkillForDisplay{
     background-color: darkgrey;
     width: 5em;

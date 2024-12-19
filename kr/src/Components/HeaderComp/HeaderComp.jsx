@@ -8,7 +8,6 @@ export default function  HeaderComp(){
         <header>
             <Link className='headerName' to ="/"><img  src="http://localhost:5000/D2H.png" alt="" /></Link>               
                 <div className='Header_div'>
-                    <Search/>
                     <Asd/>              
                 </div>
             </header>

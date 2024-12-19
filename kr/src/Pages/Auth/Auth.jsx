@@ -3,6 +3,8 @@ import './Auth.css';
 import { useNavigate } from 'react-router-dom';
 import { registration, login } from '../../http/userAPI';
 import { userStore } from '../../store/UserStore';
+import Footer from '../../Components/Footer/Footer';
+import HeaderComp from '../../Components/HeaderComp/HeaderComp';
 
 function Auth() {
     const [isLoginForm, setIsLoginForm] = useState(true);
@@ -40,6 +42,8 @@ function Auth() {
     };
 
     return (
+        <>
+        <HeaderComp/>
         <div className="auth-container">
             <h2>Authentication</h2>
             <form onSubmit={handleSubmit}>
@@ -72,6 +76,8 @@ function Auth() {
                 Switch to {isLoginForm ? 'Registration' : 'Login'}
             </button>
         </div>
+        <Footer/>
+        </>
     );
 }
 

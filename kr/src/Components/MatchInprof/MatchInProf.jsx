@@ -29,19 +29,65 @@ function MatchInprof({ match }) {
 
     let imgUrl=process.env.REACT_APP_API_URL+`${hero.HeroImg}`
     return (
-        <Box key={match.id} sx={{ p: 2, width: '70em', backgroundColor:"darkgray",alignItems:"center",display:"flex",justifyContent:'flex-start' }}>
-            <Box sx={{display:"flex",gap:"20em"}}>
-            <Box sx={{alignItems:"center",display:"flex",gap:"2em"}}>
-                <img className='heroimg' src={imgUrl} alt="" />
-                <Typography sx={{fontSize:40}}>
-                    {hero.HeroName}
-                </Typography>
-            </Box>
-            <Typography sx={{fontSize:40}}>
-                Result: Won
-            </Typography>
-        </Box>
-        </Box>
+        <Box 
+  key={match.id} 
+  sx={{ 
+    p: 2, 
+    width: { xs: "40%", sm: "80%", md: "100%", lg: "100%" }, 
+    backgroundColor: "darkgray", 
+    display: "flex", 
+    alignSelf:"center",
+    flexDirection: { xs: "column", sm: "row" }, 
+    justifyContent: "space-between", 
+    flexWrap:"wrap",
+    alignItems: "center",
+    borderLeft: { xs: 'none', sm: '1px solid gray' }
+  }}
+>
+  <Box 
+    sx={{ 
+      display: "flex", 
+      flexDirection: { xs: "column", sm: "row" }, 
+      gap: { xs: "1em", sm: "10em", md: "20em" }, 
+      alignItems: "center" 
+    }}
+  >
+    <Box 
+      sx={{ 
+        display: "flex", 
+        flexDirection: { xs: "column", sm: "row" }, 
+        gap: "1em", 
+        alignItems: "center" 
+      }}
+    >
+      <img 
+        className='heroimg' 
+        src={imgUrl} 
+        alt="" 
+      />
+      <Typography 
+        sx={{ 
+          fontSize: { xs: 16, sm: 20, md: 30 }, 
+          textAlign: { xs: "center", sm: "left" } 
+        }}
+      >
+        {hero.HeroName}
+      </Typography>
+    </Box>
+  </Box>
+  <Typography 
+    sx={{ 
+      fontSize: { xs: 16, sm: 20, md: 30 }, 
+      marginTop: { xs: "1em", sm: "0" }, 
+      textAlign: { xs: "center", sm: "right" } 
+    }}
+  >
+    Result: Won
+  </Typography>
+</Box>
+
+
+
     );
 }
 

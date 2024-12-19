@@ -10,7 +10,8 @@ import { Button } from '@mui/material';
 function GetMatchesinProf(userId) { // Correctly use useParams
     const [matches, setMatches] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    console.log(userId.userId)
+    
+    
     useEffect(() => {
         const fetchMatches = async () => {
             try {
@@ -42,13 +43,13 @@ function GetMatchesinProf(userId) { // Correctly use useParams
     }
 
     return (
-        <Box sx={{ pt: 5, pl: 5, width: '70%',borderLeft:"1px solid rgb(109, 0, 0)",display:"flex",flexDirection:"column",alignItems:"center",gap:'3em' }}>
+        <Box sx={{ pt: 5, pl: {xs:0,sm:5}, width: {xs:"100%",sm:"80%"},borderLeft:{xs:"none",sm:"1px solid rgb(109, 0, 0)"},borderTop:{xs:"1px solid rgb(109, 0, 0)",sm:"none"},display:"flex",flexDirection:"column",alignItems:"center",gap:'3em' }}>
             {matches.map((match, index) => ( // Add index as key if id is not available
-            <Link to={`/match/${match.MatchMatchId}`}>
-                <MatchInprof key={match.id || index} match={match} />
+            <Link style={{width:"80%",display:"flex", justifyContent:"center"}}  to={`/match/${match.MatchMatchId}`}>
+                <MatchInprof key={match.id || index} match={match}/>
             </Link> 
             ))}
-            <Link to="/addmatch"><Button sx={{width:"10%",alignSelf:"end",color:"white"}}>Add Match</Button></Link>
+            <Link to="/addmatch"><Button sx={{width:{xs:"100%",sm:"100%"},alignSelf:{xs:"center",sm:"end"},color:"white",mb:{xs:1,sm:0}}}>Add Match</Button></Link>
         </Box>
     );
 }

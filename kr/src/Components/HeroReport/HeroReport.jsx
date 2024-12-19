@@ -111,7 +111,7 @@ function HeroReport({heroId}) {
 
     return (
         <div style={{display:"flex", justifyContent:"center"}} >
-            <button style={{width:"10%",margin:"1em 0 1em 0"}} onClick={generateHeroReport}>Generate Hero Report</button>
+            <button className='CreateReport' onClick={generateHeroReport}>Generate Hero Report</button>
         </div>
     );
 }

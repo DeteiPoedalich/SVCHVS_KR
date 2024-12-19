@@ -87,28 +87,43 @@ useEffect(() => {
     console.log(teams)
 // ,borderRight:'1px solid rgb(109, 0, 0)',borderBottom:'1px solid rgb(109, 0, 0)'
 return (
-    <Box sx={{ pt: 5, pl: 5, width: '25em', height: '70%' }}>
-        <Typography variant="h6" sx={{ fontSize: '36px', color: 'white', ml: 2 }}>
-            Teams played in
+    <Box sx={{ pt: { xs: 0, sm: 5 }, pl: { xs: 0, sm: 5 }, width: { xs: '100%', sm: '25em' }, height: '70%' }}>
+  <Typography variant="h6" sx={{ fontSize: { xs: '24px', sm: '36px' }, color: 'white', ml: 2 ,textAlign:{xs:"center"},}}>
+    Teams played in
+  </Typography>
+  {teams.map((team, index) => (
+    <Link key={team.TeamId || index} to={`/teams/${team.TeamId}`}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent:{xs:"center",sm:"initial"},
+          width: { xs: '90%', sm: '20em' },
+          mt: 2,
+          mb: 2,
+        }}
+      >
+        <Avatar
+          alt={`${team.TeamName} Avatar`}
+          src={process.env.REACT_APP_API_URL + (team.TeamImg || 'nivea.jpg')}
+          sx={{ width: { xs: 80, sm: 100 }, height: { xs: 80, sm: 100 } }}
+        />
+        <Typography
+          variant="h6"
+          sx={{
+            fontSize: { xs: '18px', sm: '24px' },
+            color: 'white',
+            ml: 2,
+          }}
+        >
+          {team.TeamName}
         </Typography>
-        {teams.map((team, index) => ( // Add index as a second argument
-            <Link to={`/teams/${team.TeamId}`}>
-            <Box
-                key={team.TeamId || index} // Use TeamId if available, otherwise index
-                sx={{ display: 'flex', alignItems: 'center', width: '20em', mt: 2, mb: 2 }}
-            >
-                <Avatar
-                    alt={`${team.TeamName} Avatar`}
-                    src={process.env.REACT_APP_API_URL+`${team.TeamImg}` || process.env.REACT_APP_API_URL+"nivea.jpg"}
-                    sx={{ width: 100, height: 100 }}
-                />
-                <Typography variant="h6" sx={{ fontSize: '24px', color: 'white', ml: 2 }}> {/* Adjusted font size */}
-                    {team.TeamName}
-                </Typography>
-            </Box>
-            </Link>
-        ))}
-    </Box>
+      </Box>
+    </Link>
+  ))}
+</Box>
+
+
 );
 }
 
