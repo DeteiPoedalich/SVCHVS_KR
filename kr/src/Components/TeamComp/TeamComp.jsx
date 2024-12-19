@@ -54,7 +54,7 @@ export default function TeamComp(props) {
                     console.error("UserId not found in token");// Or handle the error appropriately
                     return;
                 }
-                const response = await fetch(`http://localhost:5000/api/user/profile/${userId}`, {
+                const response = await fetch(process.env.REACT_APP_API_URL+`api/user/profile/${userId}`, {
                     headers: {
                         'Authorization': `Bearer ${accessToken}`,
                     },
@@ -88,7 +88,7 @@ export default function TeamComp(props) {
         if (user && (user.CurrentTeamId === null || user.CurrentTeamId !== parseInt(TeamId, 10))) {
             setIsLoading(true);
             try {
-                const response = await fetch(`http://localhost:5000/api/user/jointeam/${user.UserId}`, {
+                const response = await fetch(process.env.REACT_APP_API_URL+`api/user/jointeam/${user.UserId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ export default function TeamComp(props) {
             <Box sx={{ textAlign: 'center', display: 'flex', width: 'auto',ml:7,alignSelf:"start" }}>
                 <Avatar
                     alt="User Avatar"
-                    src={props.team && props.team.TeamImg ? `http://localhost:5000/${props.team.TeamImg}` : 'http://localhost:5000/nivea.jpg'}
+                    src={props.team && props.team.TeamImg ? process.env.REACT_APP_API_URL+`${props.team.TeamImg}` : process.env.REACT_APP_API_URL+'nivea.jpg'}
                     sx={{ width: 150, height: 150, margin: '0 auto' }}
                 />
 
@@ -141,7 +141,7 @@ export default function TeamComp(props) {
                       
                     <Box sx={{display:"flex",alignItems:"center",gap:"1em"}} key={member.UserId} >
                         <Avatar sx={{width:"4em",height:"auto"}}>
-                            <img alt={member.NickName} src={`http://localhost:5000/sema.jpg`} />
+                            <img alt={member.NickName} src={process.env.REACT_APP_API_URL+`sema.jpg`} />
                         </Avatar>
                         <Typography sx={{fontSize:36}}  >{member.NickName}</Typography>
                     </Box>            

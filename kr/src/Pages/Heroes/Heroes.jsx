@@ -8,10 +8,10 @@ export default function Heroes(){
         <>
             <HeaderComp />
             <div className='AllHeroes'>
-                <HeroByAttribute text="STRENGTH" img="http://localhost:5000/hero_strength.png"/>
-                <HeroByAttribute text="AGILITY" img="http://localhost:5000/hero_agility.png"/>
-                <HeroByAttribute text="INTELLIGENCE" img="http://localhost:5000/hero_intelligence.png"/>
-                <HeroByAttribute text="UNIVERSAL" img="http://localhost:5000/hero_universal.png"/>
+                <HeroByAttribute text="STRENGTH" img={process.env.REACT_APP_API_URL+"hero_strength.png"}/>
+                <HeroByAttribute text="AGILITY" img={process.env.REACT_APP_API_URL+"hero_agility.png"}/>
+                <HeroByAttribute text="INTELLIGENCE" img={process.env.REACT_APP_API_URL+"hero_intelligence.png"}/>
+                <HeroByAttribute text="UNIVERSAL" img={process.env.REACT_APP_API_URL+"hero_universal.png"}/>
             </div>
             <Footer/>
         </>

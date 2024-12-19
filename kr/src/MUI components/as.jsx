@@ -47,18 +47,18 @@ function ResponsiveAppBar() {
             let userId
             if (token) {
                 try {
-                    const response = await axios.get(`http://localhost:5000/api/user/profile/${userId}`, {
+                    const response = await axios.get(process.env.REACT_APP_API_URL+`api/user/profile/${userId}`, {
                         headers: { Authorization: `Bearer ${token}` },
                     });
                     setIsLoggedIn(true);
                     console.log(response.data.Avatar)
-                    setAvatarUrl(`http://localhost:5000/sema.jpg`);
+                    setAvatarUrl(process.env.REACT_APP_API_URL+`sema.jpg`);
                     setCurrentUser(response.data); // Ensure this contains user data
                 } catch (error) {
                     console.error('Error fetching user data:', error);
                     setIsLoggedIn(false);
                     setAvatarUrl('');
-                    setCurrentUser(null);
+                    setCurrentUser(null); 
                 }
             } else {
                 setIsLoggedIn(false);

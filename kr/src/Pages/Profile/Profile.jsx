@@ -118,7 +118,7 @@ function Profile() {
                         </Typography>
                         <Avatar
                             alt="Team Avatar"
-                            src={`http://localhost:5000/${team.TeamImg}` || "http://localhost:5000/nivea.jpg"}
+                            src={process.env.REACT_APP_API_URL+`${team.TeamImg}` || process.env.REACT_APP_API_URL+"nivea.jpg"}
                             sx={{ width: 150, height: 150, margin: '0 auto' }}
                         />
                         </Box>

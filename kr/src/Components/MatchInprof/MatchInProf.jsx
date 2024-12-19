@@ -27,7 +27,7 @@ function MatchInprof({ match }) {
       return <div>Loading hero...</div>;
     }
 
-    let imgUrl=`http://localhost:5000/${hero.HeroImg}`
+    let imgUrl=process.env.REACT_APP_API_URL+`${hero.HeroImg}`
     return (
         <Box key={match.id} sx={{ p: 2, width: '70em', backgroundColor:"darkgray",alignItems:"center",display:"flex",justifyContent:'flex-start' }}>
             <Box sx={{display:"flex",gap:"20em"}}>

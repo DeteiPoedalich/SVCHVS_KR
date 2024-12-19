@@ -20,7 +20,7 @@ const AddMatchPage = () => {
     useEffect(() => {
         const fetchHeroes = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/heroes'); // Replace with your heroes API endpoint
+                const response = await axios.get(process.env.REACT_APP_API_URL+'api/heroes'); // Replace with your heroes API endpoint
                 setHeroes(response.data);
             } catch (error) {
                 console.error("Error fetching heroes:", error);
@@ -29,15 +29,6 @@ const AddMatchPage = () => {
                 setLoadingHeroes(false);
             }
         };
-        // const fetchMatchCount = async () => {
-        //     try {
-        //         const response = await axios.get('http://localhost:5000/api/match/count');
-        //         console.log('Match count:', response.data);
-        //     } catch (error) {
-        //         console.error('Error fetching match count:', error);
-        //     }
-        // };
-        // fetchMatchCount();
         fetchHeroes();
     }, []);
 
@@ -55,7 +46,7 @@ const AddMatchPage = () => {
     
     const findUserId = async (index, playerName) => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/user?NickName=${playerName}`);
+            const response = await axios.get(process.env.REACT_APP_API_URL+`api/user?NickName=${playerName}`);
             console.log(response);
             if (response.data && response.data.length > 0) {
                 setPlayers((prevPlayers) =>
@@ -96,7 +87,7 @@ const AddMatchPage = () => {
 
         try {
             const playerPromises = players.map(playerData =>
-                axios.post('http://localhost:5000/api/playerinmatch', {
+                axios.post(process.env.REACT_APP_API_URL+'api/playerinmatch', {
                     ...playerData, // Передаем всю структуру, включая MatchMatchId
                 })
             );
@@ -114,13 +105,13 @@ const AddMatchPage = () => {
 
             console.log("Match data to send:", matchData); // Логирование данных матча
 
-            const response=await axios.post('http://localhost:5000/api/match', {PlayerId1: playerIds[0], PlayerId2: playerIds[1], PlayerId3: playerIds[2],
+            const response=await axios.post(process.env.REACT_APP_API_URL+'api/match', {PlayerId1: playerIds[0], PlayerId2: playerIds[1], PlayerId3: playerIds[2],
                 PlayerId4: playerIds[3], PlayerId5: playerIds[4],
                 PlayerId6: playerIds[5], PlayerId7: playerIds[6], PlayerId8: playerIds[7],
                 PlayerId9: playerIds[8], PlayerId10: playerIds[9]});
             console.log(response.data)
             playerIds.map(playerId =>
-                axios.put(`http://localhost:5000/api/playerinmatch/${playerId}`, { // Передаем всю структуру, включая MatchMatchId
+                axios.put(process.env.REACT_APP_API_URL+`api/playerinmatch/${playerId}`, { // Передаем всю структуру, включая MatchMatchId
                     MatchMatchId: response.data.MatchId // Используем matchData.id
                 })
             );

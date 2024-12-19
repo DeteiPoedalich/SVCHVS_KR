@@ -2,7 +2,7 @@ import { $host } from "./index";
 
 export const fetchPsIM = async () => {
     try {
-        const response = await $host.get('http://localhost:5000/api/playerinmatch');
+        const response = await $host.get(process.env.REACT_APP_API_URL+'api/playerinmatch');
         const players = response.data; //  Backend возвращает массив напрямую
         return players; // Возвращаем массив
     } catch (error) {
@@ -13,7 +13,7 @@ export const fetchPsIM = async () => {
 export const fetchPIM = async (PlayerId) => {
     try {
         console.log(`Fetching hero with ID: ${PlayerId}`);  // Логирование ID
-        const response = await $host.get(`http://localhost:5000/api/playerinmatch/${PlayerId}`);
+        const response = await $host.get(process.env.REACT_APP_API_URL+`api/playerinmatch/${PlayerId}`);
         console.log('Response from server:', response);  // Логируем ответ
         const player = response.data;  // Предполагаем, что сервер возвращает один объект героя
         return player;  // Возвращаем объект
@@ -25,7 +25,7 @@ export const fetchPIM = async (PlayerId) => {
 export const fetchSomePIM = async (matchId) => {
     try {
         console.log(`Fetching hero with ID: ${matchId}`);  // Логирование ID
-        const response = await $host.get(`http://localhost:5000/api/playerinmatch/inmatch/${matchId}`);
+        const response = await $host.get(process.env.REACT_APP_API_URL+`api/playerinmatch/inmatch/${matchId}`);
         console.log('Response from server:', response);  // Логируем ответ
         return response.data;  // Предполагаем, что сервер возвращает один объект героя // Возвращаем объект
     } catch (error) {

@@ -32,7 +32,7 @@ export default function TeamsComp() {
         setCreateTeamLoading(true); // Set loading state to true
         try {
             const accessToken = localStorage.getItem('token');
-            const response = await fetch("http://localhost:5000/api/team", {
+            const response = await fetch(process.env.REACT_APP_API_URL+`api/team`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ export default function TeamsComp() {
             }}>
                 <img
                     style={{ width: '70%', height: "70%", borderRadius: "15px" }}
-                    src={team.TeamImg ? `http://localhost:5000/${team.TeamImg}` : `http://localhost:5000/nivea.jpg`}
+                    src={team.TeamImg ? process.env.REACT_APP_API_URL+`${team.TeamImg}` : process.env.REACT_APP_API_URL+`nivea.jpg`}
                     alt={team.TeamName}
                 />
                 <p style={{ fontSize: 24 }}>{team.TeamName}</p>

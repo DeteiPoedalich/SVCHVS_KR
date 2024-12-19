@@ -5,8 +5,8 @@ import Asd from '../../MUI components/as.jsx'
 import { Box } from '@mui/material';
 
 export default function  Footer(){    
-    const tg="http://localhost:5000/tg.png"
-    const gh="http://localhost:5000/github.png"
+    const tg=process.env.REACT_APP_API_URL+"tg.png"
+    const gh=process.env.REACT_APP_API_URL+"github.png"
     return(
         <footer>
             <Box sx={{display:"flex",alignItems:"center"}}>

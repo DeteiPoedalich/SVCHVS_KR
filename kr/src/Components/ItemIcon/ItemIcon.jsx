@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 export default function ItemIcon(props) {
     const { item } = props;
-    const imageUrl = `http://localhost:5000/${item.ItemImg}`; // Формирование URL
+    const imageUrl = process.env.REACT_APP_API_URL+`${item.ItemImg}`; // Формирование URL
     const [isShown, setIsShown] = useState(false);
     return (
         <div>

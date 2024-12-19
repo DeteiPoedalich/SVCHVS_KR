@@ -2,39 +2,39 @@ import { $host, $authHost } from "./index"; // Import $authHost
 
 
 export const registration = async (NickName, password) => {
-    const { data } = await $host.post('http://localhost:5000/api/user/registration', { NickName, password });
+    const { data } = await $host.post(process.env.REACT_APP_API_URL+'api/user/registration', { NickName, password });
     localStorage.setItem('token', data.accessToken); // Store the token immediately after registration
     return data; // Decode the access token
 };
 
 export const login = async (NickName, password) => {
-    const { data } = await $host.post('http://localhost:5000/api/user/login', { NickName, password });
+    const { data } = await $host.post(process.env.REACT_APP_API_URL+'api/user/login', { NickName, password });
     localStorage.setItem('token', data.accessToken); // Store the token
     return data;
 };
 export const logout=async(NickName, password) => {
-    const { data } = await $host.post('http://localhost:5000/api/user/logout', { NickName, password });
+    const { data } = await $host.post(process.env.REACT_APP_API_URL+'api/user/logout', { NickName, password });
     localStorage.clear('token', data.accessToken); // Store the token
     return data;
 };
 export const refresh=async(NickName, password) => {
-    const { data } = await $host.get('http://localhost:5000/api/user/refresh', { NickName, password });
+    const { data } = await $host.get(process.env.REACT_APP_API_URL+'api/user/refresh', { NickName, password });
     localStorage.clear('token', data.accessToken); // Store the token
     return data;
 };
 export const getProfile=async(userId) => {
-    const { data } = await $host.get(`http://localhost:5000/api/user/profile/${userId}`); // Store the token
+    const { data } = await $host.get(process.env.REACT_APP_API_URL+`api/user/profile/${userId}`); // Store the token
     return data;
 };
 
 export const getUsers=async() => {
-    const { data } = await $host.get(`http://localhost:5000/api/user/users`); // Store the token
+    const { data } = await $host.get(process.env.REACT_APP_API_URL+`api/user/users`); // Store the token
     return data;
 };
 export const getUsersByTeam = async (params = {}) => {
     try {
         const { where } = params; // Extract where clause
-        let url = `http://localhost:5000/api/user/users/`;
+        let url = process.env.REACT_APP_API_URL+`api/user/users/`;
 
         if (where) {
             // Construct query string for where clause
@@ -57,7 +57,7 @@ export const update = async (UserId, NickName ) => { // Accept avatar as a File 
         console.log(NickName)
 
         const { data } = await $host.put(
-            `http://localhost:5000/api/user/update/${UserId}`,
+            process.env.REACT_APP_API_URL+`api/user/update/${UserId}`,
             {NickName}, // Send FormData
             {
                 headers: {

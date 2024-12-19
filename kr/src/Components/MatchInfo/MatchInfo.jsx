@@ -5,7 +5,6 @@ import { Box, Typography,Divider  } from "@mui/material";
 import axios from 'axios'; // Import axios
 import ItemBuild from "../ItemBuild/ItemBuild";
 
-const baseUrl = 'http://localhost:5000/api'; // Base URL for your API
 
 function MatchInfo() {
     const { matchId } = useParams();
@@ -29,7 +28,7 @@ function MatchInfo() {
                 const playerWithHeroDetails = await Promise.all(
                     fetchedPlayers.map(async (player) => {
                         try {
-                            const heroResponse = await axios.get(`${baseUrl}/heroes/${player.HeroId}`); // Use player.HeroId
+                            const heroResponse = await axios.get(process.env.REACT_APP_API_URL+`api/heroes/${player.HeroId}`); // Use player.HeroId
                             return { ...player, hero: heroResponse.data };
                         } catch (heroError) {
                             console.error(`Error fetching hero details for player ${player.PlayerName}:`, heroError);
@@ -83,7 +82,7 @@ function MatchInfo() {
             {player.hero ? (
                 <>
                     <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <img style={{ width: '97px', height: '55px' }} src={`http://localhost:5000/${player.hero.HeroImg}`} alt="" />
+                        <img style={{ width: '97px', height: '55px' }} src={process.env.REACT_APP_API_URL+`${player.hero.HeroImg}`} alt="" />
                     </Box>
                     <Box sx={{ pl: 2 }}>
                         <Typography sx={{ fontSize: 32, m: 0 }}>{player.PlayerName}</Typography>

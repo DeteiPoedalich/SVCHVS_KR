@@ -2,7 +2,7 @@ import { $host } from "./index";
 
 export const fetchFacets = async () => {
     try {
-        const response = await $host.get('http://localhost:5000/api/facet');
+        const response = await $host.get(process.env.REACT_APP_API_URL+'api/facet');
         const facets = response.data; //  Backend возвращает массив напрямую
         return facets; // Возвращаем массив
     } catch (error) {

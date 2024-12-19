@@ -15,7 +15,7 @@ const HeroNameEtc = ({heroId}) => {
         }
         const fetchData = async () => {
             try {
-                const loadedHero = await fetch(`http://localhost:5000/api/heroes/${heroId}`);
+                const loadedHero = await fetch(process.env.REACT_APP_API_URL+`api/heroes/${heroId}`);
                 const data = await loadedHero.json();  
                 setHero(data);  // Устанавливаем данные героя в состояние
             } catch (error) {
@@ -32,41 +32,41 @@ const HeroNameEtc = ({heroId}) => {
     if (!hero) return <div>Hero not found</div>;  // Если данных нет, отображаем ошибку
     let fileName;
     if(hero.Attribute==="Strength"){
-        fileName="http://localhost:5000/hero_strength.png"
+        fileName=process.env.REACT_APP_API_URL+"hero_strength.png"
     }
     else if(hero.Attribute==="Agility"){
-        fileName="http://localhost:5000/hero_agility.png"
+        fileName=process.env.REACT_APP_API_URL+"hero_agility.png"
     }
     else if(hero.Attribute==="Intelligence"){
-        fileName="http://localhost:5000/hero_intelligence.png"
+        fileName=process.env.REACT_APP_API_URL+"hero_intelligence.png"
     }
     else if(hero.Attribute==="Universal"){
-        fileName="http://localhost:5000/hero_universal.png"
+        fileName=process.env.REACT_APP_API_URL+"hero_universal.png"
     }
     let HeroDifficulty1,HeroDifficulty2,HeroDifficulty3
     if(hero.Difficulty===1){
-        HeroDifficulty1="http://localhost:5000/Rectangle_1.png"
-        HeroDifficulty2="http://localhost:5000/Frame_117.png"
-        HeroDifficulty3="http://localhost:5000/Frame_117.png"
+        HeroDifficulty1=process.env.REACT_APP_API_URL+"Rectangle_1.png"
+        HeroDifficulty2=process.env.REACT_APP_API_URL+"Frame_117.png"
+        HeroDifficulty3=process.env.REACT_APP_API_URL+"Frame_117.png"
     }
     else if(hero.Difficulty===2){
-        HeroDifficulty1="http://localhost:5000/Rectangle_1.png"
-        HeroDifficulty2="http://localhost:5000/Rectangle_1.png"
-        HeroDifficulty3="http://localhost:5000/Frame_117.png"
+        HeroDifficulty1=process.env.REACT_APP_API_URL+"Rectangle_1.png"
+        HeroDifficulty2=process.env.REACT_APP_API_URL+"Rectangle_1.png"
+        HeroDifficulty3=process.env.REACT_APP_API_URL+"Frame_117.png"
     }
     else if(hero.Difficulty===3){
-        HeroDifficulty1="http://localhost:5000/Rectangle_1.png"
-        HeroDifficulty2="http://localhost:5000/Rectangle_1.png"
-        HeroDifficulty3="http://localhost:5000/Rectangle_1.png"
+        HeroDifficulty1=process.env.REACT_APP_API_URL+"Rectangle_1.png"
+        HeroDifficulty2=process.env.REACT_APP_API_URL+"Rectangle_1.png"
+        HeroDifficulty3=process.env.REACT_APP_API_URL+"Rectangle_1.png"
     }
 
     let AttackTypeImg
     if(hero.AttackType==="Melee")
     {
-        AttackTypeImg="http://localhost:5000/melee.svg"
+        AttackTypeImg=process.env.REACT_APP_API_URL+"melee.svg"
     }
     else{
-        AttackTypeImg="http://localhost:5000/ranged.svg"
+        AttackTypeImg=process.env.REACT_APP_API_URL+"ranged.svg"
     }
 
     return (
@@ -93,14 +93,14 @@ const HeroNameEtc = ({heroId}) => {
                         <div className='fullstat'>
                             <p className='statname'>STRENGTH</p>
                             <div className='stat'>
-                                <img src="http://localhost:5000/hero_strength.png" alt="" />
+                                <img src={process.env.REACT_APP_API_URL+"hero_strength.png"} alt="" />
                                 <p>{hero.Strength}+{hero.StrengthPlus}</p>   
                             </div>
                         </div>
                         <div className='fullstat'>
                             <p className='statname'>AGILITY</p>
                             <div className='stat'>
-                                <img src="http://localhost:5000/hero_agility.png" alt="" />
+                                <img src={process.env.REACT_APP_API_URL+"hero_agility.png"} alt="" />
                                 <p>{hero.Agility}+{hero.AgilityPlus}</p>
                             </div>
                             
@@ -108,7 +108,7 @@ const HeroNameEtc = ({heroId}) => {
                         <div className='fullstat'>
                             <p className='statname'>INTELLIGENCE</p>
                             <div className='stat'>
-                                <img src="http://localhost:5000/hero_intelligence.png" alt="" />
+                                <img src={process.env.REACT_APP_API_URL+"hero_intelligence.png"} alt="" />
                                 <p>{hero.Intelligence}+{hero.IntelligencePlus}</p>
                             </div>
                             

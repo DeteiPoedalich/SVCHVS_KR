@@ -20,7 +20,7 @@ function HeroReport({heroId}) {
 
         const fetchData = async () => {
             try {
-                const heroResponse = await fetch(`http://localhost:5000/api/heroes/${heroId}`);
+                const heroResponse = await fetch(process.env.REACT_APP_API_URL+`api/heroes/${heroId}`);
                 if (!heroResponse.ok) {
                     throw new Error(`HTTP error fetching hero! status: ${heroResponse.status}`);
                 }
@@ -36,7 +36,7 @@ function HeroReport({heroId}) {
                 ].filter(id => id !== null); // Filter out null skill IDs
 
                 const skillPromises = skillIds.map(skillId =>
-                    fetch(`http://localhost:5000/api/skill/${skillId}`)
+                    fetch(process.env.REACT_APP_API_URL+`api/skill/${skillId}`)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error(`HTTP error fetching skill ${skillId}! status: ${response.status}`);

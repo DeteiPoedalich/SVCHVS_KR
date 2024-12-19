@@ -22,7 +22,7 @@ function AllUsersPage() {
                 )
             }
             try {
-                const response = await fetch('http://localhost:5000/api/user/allusers', {
+                const response = await fetch(process.env.REACT_APP_API_URL+'api/user/allusers', {
                     headers: {
                         'Content-Type': 'application/json',
                         // Add any necessary authorization headers here if required

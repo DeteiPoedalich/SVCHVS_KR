@@ -22,7 +22,7 @@ useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
             try {
-                const response = await axios.get(`http://localhost:5000/api/user/profile/${userId}`, {
+                const response = await axios.get(process.env.REACT_APP_API_URL+`api/user/profile/${userId}`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 
@@ -99,7 +99,7 @@ return (
             >
                 <Avatar
                     alt={`${team.TeamName} Avatar`}
-                    src={`http://localhost:5000/${team.TeamImg}` || "http://localhost:5000/nivea.jpg"}
+                    src={process.env.REACT_APP_API_URL+`${team.TeamImg}` || process.env.REACT_APP_API_URL+"nivea.jpg"}
                     sx={{ width: 100, height: 100 }}
                 />
                 <Typography variant="h6" sx={{ fontSize: '24px', color: 'white', ml: 2 }}> {/* Adjusted font size */}

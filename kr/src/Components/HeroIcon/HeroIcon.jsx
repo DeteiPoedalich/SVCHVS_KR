@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 export default function HeroIcon(props) {
     const { hero } = props;
-    const imageUrl = `http://localhost:5000/${hero.HeroImg}`; // Формирование URL
+    const imageUrl = process.env.REACT_APP_API_URL+`${hero.HeroImg}`; // Формирование URL
     const [isShown, setIsShown] = useState(false);
 
     return (

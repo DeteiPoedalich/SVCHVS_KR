@@ -14,7 +14,7 @@ const Skill = ({ skillId,className3} ) => {
         
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/skill/${skillId}`);
+                const response = await fetch(process.env.REACT_APP_API_URL+`api/skill/${skillId}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -34,7 +34,8 @@ const Skill = ({ skillId,className3} ) => {
     if (loading) return <div>Loading...</div>;
     if (error) return <div>{error}</div>;
     if (!skill) return <div>Skill not found</div>;
-    const imageUrl = `http://localhost:5000/${skill.SkillImg}`;
+    const imageUrl = process.env.REACT_APP_API_URL+`${skill.SkillImg}`;
+    console.log(imageUrl)
     return (
         <div>
             {isShown && (
