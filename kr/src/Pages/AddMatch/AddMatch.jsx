@@ -133,14 +133,13 @@ const AddMatchPage = () => {
             {error && <Typography color="error">{error}</Typography>}
             <Grid2 container spacing={1} sx={{ display: "flex", width: "100%", justifyContent: "center" }}>
                 {players.map((player, index) => (
-                    <Grid2 item xs={12} key={index} sx={{ width: {xs:"99%",sm:"90%",md:"70%",lg:"53%"}, backgroundColor: "rgb(41,41,41)", mb: 1 }}>
+                    <Grid2 item xs={12} key={index} sx={{ width: {xs:"99%",sm:"90%",md:"70%",lg:"53%"}, backgroundColor: "rgb(200,200,200)", mb: 1 ,borderRadius:"10px",pt:"5px"}}>
                         <Grid2 container spacing={1} sx={{ width: "100%" , display: "grid", gridTemplateColumns: {xs:"0.5fr 0.5fr 0.5fr",sm:"0.5fr 0.5fr 0.2fr 0.2fr 0.2fr 0.4fr",lg:"0.5fr 0.5fr 0.1fr 0.1fr 0.1fr 0.4fr"}, gridAutoColumns:1}}>
                             <Grid2 item xs={6}>
                                 <TextField
                                     label="Player Name"
                                     fullWidth
                                     value={player.PlayerName}
-                                    
                                     onChange={e => handlePlayerChange(index, 'PlayerName', e.target.value)}
                                 />
                             </Grid2>

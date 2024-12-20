@@ -86,10 +86,10 @@ function AllUsersPage() {
                 <TableHead>
                     <TableRow >
                         <TableCell sx={{color: 'white',borderRight:"solid white 1px",p:"8px"}}>ID</TableCell>
-                        <TableCell sx={{color: 'white',borderRight:"solid white 1px"}} align="right">Nickname</TableCell>
-                        <TableCell sx={{color: 'white',borderRight:"solid white 1px"}} align="right">Team Id</TableCell>
-                        <TableCell sx={{color: 'white',borderRight:"solid white 1px"}} align="right">Played in teams</TableCell>
-                        <TableCell sx={{color: 'white',borderRight:"solid white 1px"}} align="right">Role</TableCell>
+                        <TableCell sx={{color: 'white',borderRight:"solid white 1px",p:"8px"}} align="right">Nickname</TableCell>
+                        <TableCell sx={{color: 'white',borderRight:"solid white 1px",p:"8px"}} align="right">Team Id</TableCell>
+                        <TableCell sx={{color: 'white',borderRight:"solid white 1px",p:"8px"}} align="right">Played in teams</TableCell>
+                        <TableCell sx={{color: 'white',borderRight:"solid white 1px",p:"8px"}} align="right">Role</TableCell>
                         {/* Add other table headers as needed */}
                     </TableRow>
                 </TableHead>
@@ -97,10 +97,10 @@ function AllUsersPage() {
                     {users.map((user) => (
                         <TableRow key={user.UserId}>
                             <TableCell sx={{color: 'white',borderRight:"solid white 1px",p:"8px"}}component="th" scope="row"> {user.UserId}</TableCell>
-                            <TableCell sx={{color: 'white',borderRight:"solid white 1px"}}align="right">{user.NickName}</TableCell>
-                            <TableCell sx={{color: 'white',borderRight:"solid white 1px"}} align="right">{user.CurrentTeamId}</TableCell>
-                            <TableCell sx={{color: 'white',borderRight:"solid white 1px"}} align="right">{user.TeamList}</TableCell>
-                            <TableCell sx={{color: 'white',borderRight:"solid white 1px"}}align="right">{user.role}</TableCell>
+                            <TableCell sx={{color: 'white',borderRight:"solid white 1px",p:"8px"}}align="right">{user.NickName}</TableCell>
+                            <TableCell sx={{color: 'white',borderRight:"solid white 1px",p:"8px"}} align="right">{user.CurrentTeamId}</TableCell>
+                            <TableCell sx={{color: 'white',borderRight:"solid white 1px",p:"8px"}} align="right">{user.TeamList}</TableCell>
+                            <TableCell sx={{color: 'white',borderRight:"solid white 1px",p:"8px"}}align="right">{user.role}</TableCell>
                             {/* Add other table cells as needed */}
                         </TableRow>
                     ))}
