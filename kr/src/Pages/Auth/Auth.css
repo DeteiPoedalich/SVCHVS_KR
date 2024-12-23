@@ -1,12 +1,13 @@
 .auth-container {
-    background-color: white;
+    background-color: rgb(41, 41, 41);
     padding: 8px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 300px;  /* Adjust width as needed */
     margin: 0 auto; /* Center horizontally */
-    margin-top: 50px; /* Add some top margin */
+    margin-top: 50px;
+    color: white /* Add some top margin */
 }
 
 .form-group {
@@ -28,7 +29,7 @@
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #410000;
     color: white;
     padding: 10px 15px;
     border: none;

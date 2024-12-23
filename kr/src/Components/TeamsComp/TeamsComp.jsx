@@ -68,9 +68,13 @@ export default function TeamsComp() {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         width: 400,
-        bgcolor: 'background.paper',
+        display:'flex',
+        flexDirection:'column',
+        alignItems:"center",
+        bgcolor: 'rgb(41,41,41)',
         border: '2px solid #000',
         boxShadow: 24,
+        color:'white',
         p: 4,
     };
 
@@ -119,6 +123,7 @@ export default function TeamsComp() {
                     <TextField
                         label="Team Name"
                         variant="outlined"
+                        
                         fullWidth
                         margin="normal"
                         value={teamName}
